@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "727073997784",
+    "project_id": "foodplanner-78891",
+    "storage_bucket": "foodplanner-78891.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727073997784:android:c402314f1af1ed312de8ad",
+        "android_client_info": {
+          "package_name": "eg.gov.iti.jets.mad.foodplanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "727073997784-aeothvgdjmd1e3t21vc09k3qrg1guuqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkQG7TBSqqCUf6stJnVqB3roYDPuU2Gm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "727073997784-aeothvgdjmd1e3t21vc09k3qrg1guuqv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
