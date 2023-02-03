@@ -8,6 +8,7 @@ import android.os.Handler;
 
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.R;
+import eg.gov.iti.jets.mad.foodplanner.welcomeScreen.WelcomeScreen;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -18,7 +19,7 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                Intent intent = new Intent(SplashScreen.this, WelcomeScreen.class);
                 startActivity(intent);
             }
         }, 5000);
