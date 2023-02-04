@@ -35,8 +35,8 @@
     <string name="Logout">Logout</string>
     <string name="Ingredients">Ingredients</string>
     <string name="Add_to_Meal_Plan">Add to Meal Plan</string>
-    <string name="Steps">Sunday</string>
-    <string name="Video">Monday</string>
+    <string name="Steps">Steps</string>
+    <string name="Video">Video</string>
     <string name="Add_Favorite_Recipe">Add Favorite recipe</string>
     <string name="Search_New_Recipe">Search New Recipe</string>
     <string name="This_Week">This Week</string>
@@ -44,6 +44,8 @@
     <string name="Next_Week">Next Week</string>
     <string name="Country_Name">Country Name</string>
     <string name="Quantity">Quantity</string>
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Profile">Profile</string>
 
 </resources>
