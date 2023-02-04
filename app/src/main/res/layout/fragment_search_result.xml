@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FavScreenFragment">
+    tools:context=".favoriteScreen.FavScreenFragment">
 
     <EditText
         android:id="@+id/searchRecipes_editText"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="68dp"
-        android:textSize="25dp"
-        android:hint="@string/Search_Recipes"
-        android:gravity="center"
+        android:layout_marginTop="80dp"
         android:drawableStart="@drawable/search_black_icon"
+        android:hint="@string/Search_Recipes"
+        android:paddingStart="20dp"
+        android:background="@drawable/edittext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
