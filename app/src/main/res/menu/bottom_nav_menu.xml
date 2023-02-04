@@ -6,12 +6,12 @@
         android:enabled="true"
         android:title="@string/Home" />
     <item
-        android:id="@+id/searchFragment"
+        android:id="@+id/searchFragment2"
         android:icon="@drawable/search_black_icon"
         android:enabled="true"
         android:title="@string/Search" />
     <item
-        android:id="@+id/favouriteFragment"
+        android:id="@+id/favScreenFragment"
         android:icon="@drawable/favorite_filled_black_icon"
         android:enabled="true"
         android:title="@string/Favorite" />

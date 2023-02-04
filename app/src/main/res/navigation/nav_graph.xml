@@ -20,4 +20,14 @@
         android:name="eg.gov.iti.jets.mad.foodplanner.MealPlan.MealPlanFragment"
         android:label="fragment_meal_plan"
         tools:layout="@layout/fragment_meal_plan" />
+    <fragment
+        android:id="@+id/searchFragment2"
+        android:name="eg.gov.iti.jets.mad.foodplanner.searchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/favScreenFragment"
+        android:name="eg.gov.iti.jets.mad.foodplanner.FavScreenFragment"
+        android:label="fragment_fav_screen"
+        tools:layout="@layout/fragment_fav_screen" />
 </navigation>

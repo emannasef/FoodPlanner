@@ -33,16 +33,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController= Navigation.findNavController(this,R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView,navController);
 
-
-        TextView mainTextView = findViewById(R.id.mainTextViewu);
-        mainTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MealInfoActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
     @Override
