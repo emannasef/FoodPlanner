@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
@@ -13,6 +16,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 
 import java.util.ArrayList;
 
+import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.R;
 
 
@@ -21,6 +25,8 @@ public class MealInfoActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     IngredientAdapter ingredientAdapter;
     YouTubePlayerView youTubePlayerView ;
+
+    ImageView backImage ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,16 @@ public class MealInfoActivity extends AppCompatActivity {
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 String videoId = "4aZr5hZXP_s";
                 youTubePlayer.loadVideo(videoId, 0);
+            }
+        });
+
+
+        backImage=findViewById(R.id.backImgInfoMeal);
+        backImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MealInfoActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
