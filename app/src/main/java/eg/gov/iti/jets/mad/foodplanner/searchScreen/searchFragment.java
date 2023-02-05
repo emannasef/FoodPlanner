@@ -68,7 +68,7 @@ public class searchFragment extends Fragment {
         country_recyclerView.setLayoutManager(layoutManager_country);
 
         ArrayList input = new ArrayList<IngredientImg>();
-        IngredientImg ingredient1 = new IngredientImg( R.drawable.garlic);
+        IngredientImg ingredient1 = new IngredientImg( R.drawable.welcome_original_img);
         IngredientImg ingredient2 = new IngredientImg( R.drawable.onion);
         IngredientImg ingredient3 = new IngredientImg( R.drawable.garlic);
         IngredientImg ingredient4 = new IngredientImg( R.drawable.garlic);
