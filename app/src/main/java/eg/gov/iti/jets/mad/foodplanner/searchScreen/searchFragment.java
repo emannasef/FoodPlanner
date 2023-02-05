@@ -1,5 +1,6 @@
 package eg.gov.iti.jets.mad.foodplanner.searchScreen;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,26 +9,30 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.Ingredient;
-import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.IngredientAdapter;
+import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.MealInfoActivity;
 import eg.gov.iti.jets.mad.foodplanner.R;
+import eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.ResultSearchActivity;
 
 public class searchFragment extends Fragment {
 
-    EditText search;
     RecyclerView recyclerView;
     RecyclerView category_recyclerView;
     categoryAdapter categoryAdapter;
     RecyclerView country_recyclerView;
     CountryAdapter countryAdapter;
     IngredientImagesAdapter ingredientAdapter;
+    EditText search_editText;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,15 +130,44 @@ public class searchFragment extends Fragment {
         countries.add(country7);
         countries.add(country8);
         countries.add(country9);
-        ingredientAdapter = new IngredientImagesAdapter(getContext(), input);
+        ingredientAdapter = new IngredientImagesAdapter(getContext(), input, new IngredientImagesAdapter.igredientClickListener() {
+            @Override
+            public void onIngrediantClick(IngredientImg ingredientImg) {
+                Intent i = new Intent(getContext(),ResultSearchActivity.class);
+                startActivity(i);
+            }
+        });
         recyclerView.setAdapter(ingredientAdapter);
 
-        categoryAdapter = new categoryAdapter(getContext(), categories);
+        categoryAdapter = new categoryAdapter(getContext(), categories, new categoryAdapter.categoryClickListener() {
+            @Override
+            public void onCategoryClick(category obj) {
+                Intent i = new Intent(getContext(),ResultSearchActivity.class);
+                startActivity(i);
+            }
+        });
         category_recyclerView.setAdapter(categoryAdapter);
 
-        countryAdapter = new CountryAdapter(getContext(), countries);
+        countryAdapter = new CountryAdapter(getContext(), countries, new CountryAdapter.countryClickListener() {
+            @Override
+            public void onCountryClick(country obj) {
+                Intent i = new Intent(getContext(),ResultSearchActivity.class);
+                startActivity(i);
+            }
+        });
         country_recyclerView.setAdapter(countryAdapter);
-        search=view.findViewById(R.id.search_EditText);
+
+        search_editText=view.findViewById(R.id.search_EditText);
+        search_editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId== EditorInfo.IME_ACTION_SEARCH){
+                    Intent i =new Intent(getContext(), ResultSearchActivity.class);
+                    startActivity(i);
+                }
+                return false;
+            }
+        });
 
     }
 }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
@@ -17,6 +18,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import java.util.ArrayList;
 
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
+import eg.gov.iti.jets.mad.foodplanner.MealPlan.MealPlanFragment;
 import eg.gov.iti.jets.mad.foodplanner.R;
 
 
@@ -28,10 +30,19 @@ public class MealInfoActivity extends AppCompatActivity {
 
     ImageView backImage ;
 
+    Button addToPlanBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_info);
+        addToPlanBtn=findViewById(R.id.addToPlanBtn);
+        addToPlanBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //go to mealPlan
+            }
+        });
+
         recyclerView = (RecyclerView) findViewById(R.id.ingredientRecycleView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

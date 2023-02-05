@@ -21,10 +21,12 @@ public class favMealAdapter extends RecyclerView.Adapter<favMealAdapter.ViewHold
 
     private List<favoriteMeal> favoriteMeals;
 
+    favMealClickListener favMealClickListener;
 
-    public favMealAdapter(Context context, List<favoriteMeal> favoriteMeals) {
+    public favMealAdapter(Context context, List<favoriteMeal> favoriteMeals,favMealClickListener favMealClickListener) {
         this.context = context;
         this.favoriteMeals = favoriteMeals;
+        this.favMealClickListener =favMealClickListener;
     }
 
     @NonNull
@@ -40,6 +42,12 @@ public class favMealAdapter extends RecyclerView.Adapter<favMealAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull favMealAdapter.ViewHolder holder, int position) {
         holder.imageView.setImageResource(favoriteMeals.get(position).getImageId());
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                favMealClickListener.onFavMealClick(favoriteMeals.get(position));
+            }
+        });
     }
 
     @Override
@@ -47,6 +55,9 @@ public class favMealAdapter extends RecyclerView.Adapter<favMealAdapter.ViewHold
         return favoriteMeals.size();
     }
 
+    public interface favMealClickListener{
+        void onFavMealClick(favoriteMeal obj);
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imageView;

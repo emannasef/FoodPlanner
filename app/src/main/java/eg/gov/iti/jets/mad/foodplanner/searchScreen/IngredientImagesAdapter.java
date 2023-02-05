@@ -24,10 +24,12 @@ public class IngredientImagesAdapter extends RecyclerView.Adapter<IngredientImag
 
     private List<IngredientImg> ingredients;
 
+    igredientClickListener igredientClickListener;
 
-    public IngredientImagesAdapter(Context context, List<IngredientImg> ingredients) {
+    public IngredientImagesAdapter(Context context, List<IngredientImg> ingredients,igredientClickListener igredientClickListener) {
         this.context = context;
         this.ingredients = ingredients;
+        this.igredientClickListener=igredientClickListener;
     }
 
     @NonNull
@@ -43,6 +45,12 @@ public class IngredientImagesAdapter extends RecyclerView.Adapter<IngredientImag
     @Override
     public void onBindViewHolder(@NonNull IngredientImagesAdapter.ViewHolder holder, int position) {
         holder.imageView.setImageResource(ingredients.get(position).getImageId());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                igredientClickListener.onIngrediantClick(ingredients.get(position));
+            }
+        });
     }
 
     @Override
@@ -50,6 +58,9 @@ public class IngredientImagesAdapter extends RecyclerView.Adapter<IngredientImag
         return ingredients.size();
     }
 
+    public interface igredientClickListener{
+        void onIngrediantClick(IngredientImg ingredientImg);
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imageView;

@@ -9,14 +9,16 @@
     <EditText
         android:id="@+id/searchRecipes_editText"
         android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="80dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/edittext"
         android:drawableStart="@drawable/search_black_icon"
         android:hint="@string/Search_Recipes"
+        android:imeOptions="actionSearch"
+        android:inputType="textPersonName"
         android:paddingStart="20dp"
-        android:background="@drawable/edittext"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,16 +26,19 @@
         android:id="@+id/resultRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="490dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchRecipes_editText" />
 
     <ImageButton
-        android:id="@+id/back_btn"
+        android:id="@+id/backResult_btn"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/button"
         android:backgroundTint="@color/white"
         android:clickable="true"
         android:padding="10dp"

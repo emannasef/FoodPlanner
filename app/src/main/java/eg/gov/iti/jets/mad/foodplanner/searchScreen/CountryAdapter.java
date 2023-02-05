@@ -19,11 +19,12 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     private final Context context;
 
     private List<country> countries;
+    countryClickListener countryClickListener;
 
-
-    public CountryAdapter(Context context, List<country> countries) {
+    public CountryAdapter(Context context, List<country> countries,countryClickListener countryClickListener) {
         this.context = context;
         this.countries = countries;
+        this.countryClickListener= countryClickListener;
     }
 
     @NonNull
@@ -39,13 +40,21 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull CountryAdapter.ViewHolder holder, int position) {
         holder.imageView.setImageResource(countries.get(position).getImageId());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countryClickListener.onCountryClick(countries.get(position));
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return countries.size();
     }
-
+    public interface countryClickListener{
+        void onCountryClick(country obj);
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imageView;

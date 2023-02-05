@@ -1,5 +1,6 @@
 package eg.gov.iti.jets.mad.foodplanner.favoriteScreen;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.MealInfoActivity;
 import eg.gov.iti.jets.mad.foodplanner.R;
+import eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.ResultSearchActivity;
 import eg.gov.iti.jets.mad.foodplanner.searchScreen.IngredientImagesAdapter;
 import eg.gov.iti.jets.mad.foodplanner.searchScreen.IngredientImg;
 
@@ -40,9 +43,6 @@ public class FavScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.favRecyclerView);
-        int spanCount = 3; // 3 columns
-        int spacing = 50; // 50px
-        boolean includeEdge = false;
         recyclerView.setHasFixedSize(true);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2);
         layoutManager.setOrientation(layoutManager.VERTICAL);
@@ -71,7 +71,13 @@ public class FavScreenFragment extends Fragment {
         input.add(f8);
         input.add(f9);
 
-        favMealAdapter = new favMealAdapter(getContext(), input);
+        favMealAdapter = new favMealAdapter(getContext(), input, new favMealAdapter.favMealClickListener() {
+            @Override
+            public void onFavMealClick(favoriteMeal obj) {
+                Intent i = new Intent(getContext(), MealInfoActivity.class);
+                startActivity(i);
+            }
+        });
         recyclerView.setAdapter(favMealAdapter);
     }
 }

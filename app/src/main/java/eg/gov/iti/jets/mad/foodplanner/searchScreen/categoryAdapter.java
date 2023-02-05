@@ -20,10 +20,12 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHo
 
     private List<category> categories;
 
+    categoryClickListener categoryClickListener;
 
-    public categoryAdapter(Context context, List<category> categories) {
+    public categoryAdapter(Context context, List<category> categories,categoryClickListener categoryClickListener) {
         this.context = context;
         this.categories = categories;
+        this.categoryClickListener=categoryClickListener;
     }
 
     @NonNull
@@ -39,6 +41,12 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull categoryAdapter.ViewHolder holder, int position) {
         holder.imageView.setImageResource(categories.get(position).getImageId());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryClickListener.onCategoryClick(categories.get(position));
+            }
+        });
     }
 
     @Override
@@ -46,6 +54,9 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHo
         return categories.size();
     }
 
+    public interface categoryClickListener{
+        void onCategoryClick(category obj);
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imageView;
