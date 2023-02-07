@@ -78,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/name_EditText" />
 
     <EditText
-        android:id="@+id/Password_EditText"
+        android:id="@+id/password_EditText"
         android:layout_width="250dp"
         android:paddingStart="30dp"
         android:layout_height="40dp"
@@ -101,9 +101,9 @@
         android:ems="10"
         android:hint="@string/Confirm_password"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/Password_EditText"
-        app:layout_constraintStart_toStartOf="@+id/Password_EditText"
-        app:layout_constraintTop_toBottomOf="@+id/Password_EditText" />
+        app:layout_constraintEnd_toEndOf="@+id/password_EditText"
+        app:layout_constraintStart_toStartOf="@+id/password_EditText"
+        app:layout_constraintTop_toBottomOf="@+id/password_EditText" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/next_btn"

@@ -20,6 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import eg.gov.iti.jets.mad.foodplanner.R;
 import eg.gov.iti.jets.mad.foodplanner.welcomeScreen.WelcomeScreen;
@@ -58,6 +59,11 @@ public class ProfileFragment extends Fragment {
         name_textView=view.findViewById(R.id.userName);
         email_TextView=view.findViewById(R.id.email);
         auth=FirebaseAuth.getInstance();
+        FirebaseUser user= auth.getCurrentUser();
+        if(user!=null){
+            email_TextView.setText(user.getEmail());
+            name_textView.setText(user.getDisplayName());
+        }
 
         gso =new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(getContext(),gso);
@@ -67,10 +73,12 @@ public class ProfileFragment extends Fragment {
             name_textView.setText(account.getDisplayName());
             email_TextView.setText(account.getEmail());
         }
+
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                FirebaseAuth.getInstance().signOut();
+                gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                        Intent i =new Intent(getContext(), WelcomeScreen.class);
