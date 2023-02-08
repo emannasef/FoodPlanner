@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.R;
-import eg.gov.iti.jets.mad.foodplanner.loginScreen.LoginScreenActivity;
 import eg.gov.iti.jets.mad.foodplanner.welcomeScreen.WelcomeScreen;
 
 public class SignupScreen extends AppCompatActivity {

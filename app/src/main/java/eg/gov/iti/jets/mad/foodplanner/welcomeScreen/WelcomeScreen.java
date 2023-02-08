@@ -8,10 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import eg.gov.iti.jets.mad.foodplanner.Home.HomeFragment;
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.R;
-import eg.gov.iti.jets.mad.foodplanner.loginScreen.LoginScreenActivity;
+import eg.gov.iti.jets.mad.foodplanner.loginScreen.view.LoginScreenActivity;
 import eg.gov.iti.jets.mad.foodplanner.signupScreen.SignupScreen;
 
 public class WelcomeScreen extends AppCompatActivity {

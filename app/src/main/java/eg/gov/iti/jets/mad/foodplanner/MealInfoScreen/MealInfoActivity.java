@@ -18,7 +18,6 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import java.util.ArrayList;
 
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
-import eg.gov.iti.jets.mad.foodplanner.MealPlan.MealPlanFragment;
 import eg.gov.iti.jets.mad.foodplanner.R;
 
 
