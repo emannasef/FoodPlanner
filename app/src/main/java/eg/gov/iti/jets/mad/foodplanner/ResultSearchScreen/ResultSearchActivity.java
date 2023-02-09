@@ -13,19 +13,31 @@ import java.util.ArrayList;
 
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.MealInfoActivity;
+import eg.gov.iti.jets.mad.foodplanner.Model.Category;
+import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
+import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
+import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
 import eg.gov.iti.jets.mad.foodplanner.R;
 import eg.gov.iti.jets.mad.foodplanner.favoriteScreen.favMealAdapter;
 import eg.gov.iti.jets.mad.foodplanner.favoriteScreen.favoriteMeal;
 
-public class ResultSearchActivity extends AppCompatActivity {
+public class ResultSearchActivity extends AppCompatActivity implements Network_Delegate {
 
     ImageButton backResult_btn;
     RecyclerView recyclerView;
     ResultAdapter resultAdapter;
+    Api_Client api_client;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_search);
+
+        intent=getIntent();
+
+        api_client=Api_Client.getInstance();
+        api_client.searchBycategoryCall(this,intent.getStringExtra("search"));
+
         backResult_btn=findViewById(R.id.backResult_btn);
         recyclerView = findViewById(R.id.resultRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -40,36 +52,28 @@ public class ResultSearchActivity extends AppCompatActivity {
             }
         });
 
+    }
 
-        ArrayList input = new ArrayList<resultSearch>();
-        resultSearch r1 = new resultSearch( R.drawable.welcome_original_img);
-        resultSearch r2 = new resultSearch( R.drawable.welcome_original_img);
-        resultSearch r3 = new resultSearch( R.drawable.welcome_original_img);
-        resultSearch r4 = new resultSearch( R.drawable.welcome_original_img);
-        resultSearch r5 = new resultSearch( R.drawable.welcome_original_img);
-        resultSearch r6 = new resultSearch( R.drawable.welcome_original_img);
-        resultSearch r7 = new resultSearch( R.drawable.welcome_original_img);
-        resultSearch r8 = new resultSearch( R.drawable.welcome_original_img);
-        resultSearch r9 = new resultSearch( R.drawable.welcome_original_img);
-
-        input.add(r1);
-        input.add(r2);
-        input.add(r3);
-        input.add(r4);
-        input.add(r5);
-        input.add(r6);
-        input.add(r7);
-        input.add(r8);
-        input.add(r9);
-
-        resultAdapter = new ResultAdapter(this, input, new ResultAdapter.ResultMealClickListener() {
+    @Override
+    public void onSuccessResult(ArrayList<Meal> myMeal) {
+        resultAdapter = new ResultAdapter(this, myMeal, new ResultAdapter.ResultMealClickListener() {
             @Override
-            public void onresultMealClick(resultSearch obj) {
+            public void onresultMealClick(Meal obj) {
                 Intent i = new Intent(ResultSearchActivity.this, MealInfoActivity.class);
+                i.putExtra("mealName",obj.strMeal);
                 startActivity(i);
             }
         });
         recyclerView.setAdapter(resultAdapter);
     }
 
+    @Override
+    public void onSuccessCategoryResult(ArrayList<Category> categories) {
+
+    }
+
+    @Override
+    public void onFailureResult(String errorMessage) {
+
+    }
 }

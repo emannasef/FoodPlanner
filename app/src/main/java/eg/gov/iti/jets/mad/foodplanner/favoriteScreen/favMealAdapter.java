@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.R;
-import eg.gov.iti.jets.mad.foodplanner.searchScreen.category;
 
 public class favMealAdapter extends RecyclerView.Adapter<favMealAdapter.ViewHolder>{
 

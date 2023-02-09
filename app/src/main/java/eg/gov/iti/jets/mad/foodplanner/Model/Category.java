@@ -1,7 +1,10 @@
 package eg.gov.iti.jets.mad.foodplanner.Model;
 
 public class Category {
-   public String categoryName;
-   public String categoryImage;
+   public String strCategory;
+   public String strCategoryThumb;
+   public String idCategory;
+   public String strCategoryDescription;
+
 
 }

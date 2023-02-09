@@ -19,10 +19,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import eg.gov.iti.jets.mad.foodplanner.Model.Category;
+import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
+import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
+import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
 import eg.gov.iti.jets.mad.foodplanner.R;
 import eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.ResultSearchActivity;
 
-public class searchFragment extends Fragment {
+public class searchFragment extends Fragment implements Network_Delegate {
 
     RecyclerView recyclerView;
     RecyclerView category_recyclerView;
@@ -31,12 +35,12 @@ public class searchFragment extends Fragment {
     CountryAdapter countryAdapter;
     IngredientImagesAdapter ingredientAdapter;
     EditText search_editText;
+    Api_Client api_client;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,6 +51,9 @@ public class searchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        api_client=Api_Client.getInstance();
+        api_client.categoryCall(this);
+
         recyclerView = view.findViewById(R.id.ingredient_recycleView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -86,27 +93,6 @@ public class searchFragment extends Fragment {
         input.add(ingredient8);
         input.add(ingredient9);
 
-        ArrayList categories = new ArrayList<category>();
-        category categories1 = new category( R.drawable.welcome_original_img);
-        category categories2 = new category( R.drawable.welcome_original_img);
-        category categories3 = new category( R.drawable.welcome_original_img);
-        category categories4 = new category( R.drawable.welcome_original_img);
-        category categories5 = new category( R.drawable.welcome_original_img);
-        category categories6 = new category( R.drawable.welcome_original_img);
-        category categories7 = new category( R.drawable.welcome_original_img);
-        category categories8 = new category( R.drawable.welcome_original_img);
-        category categories9 = new category( R.drawable.welcome_original_img);
-
-        categories.add(categories1);
-        categories.add(categories2);
-        categories.add(categories3);
-        categories.add(categories4);
-        categories.add(categories5);
-        categories.add(categories6);
-        categories.add(categories7);
-        categories.add(categories8);
-        categories.add(categories9);
-
 
         ArrayList countries = new ArrayList<country>();
         country country1 = new country( R.drawable.welcome_original_img);
@@ -137,15 +123,6 @@ public class searchFragment extends Fragment {
         });
         recyclerView.setAdapter(ingredientAdapter);
 
-        categoryAdapter = new categoryAdapter(getContext(), categories, new categoryAdapter.categoryClickListener() {
-            @Override
-            public void onCategoryClick(category obj) {
-                Intent i = new Intent(getContext(),ResultSearchActivity.class);
-                startActivity(i);
-            }
-        });
-        category_recyclerView.setAdapter(categoryAdapter);
-
         countryAdapter = new CountryAdapter(getContext(), countries, new CountryAdapter.countryClickListener() {
             @Override
             public void onCountryClick(country obj) {
@@ -166,6 +143,31 @@ public class searchFragment extends Fragment {
                 return false;
             }
         });
+
+    }
+
+    @Override
+    public void onSuccessResult(ArrayList<Meal> myMeal) {
+
+    }
+
+    @Override
+    public void onSuccessCategoryResult(ArrayList<Category> categories) {
+
+        categoryAdapter = new categoryAdapter(getContext(), categories, new categoryAdapter.categoryClickListener() {
+            @Override
+            public void onCategoryClick(Category obj) {
+                Intent i = new Intent(getContext(),ResultSearchActivity.class);
+                i.putExtra("search",obj.strCategory);
+                startActivity(i);
+            }
+        });
+        category_recyclerView.setAdapter(categoryAdapter);
+
+    }
+
+    @Override
+    public void onFailureResult(String errorMessage) {
 
     }
 }

@@ -21,6 +21,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import java.util.ArrayList;
 
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
+import eg.gov.iti.jets.mad.foodplanner.Model.Category;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
 import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
@@ -224,6 +225,11 @@ public class MealInfoActivity extends AppCompatActivity implements Network_Deleg
             }
         });
         }
+
+    @Override
+    public void onSuccessCategoryResult(ArrayList<Category> categories) {
+
+    }
 
     @Override
     public void onFailureResult(String errorMessage) {

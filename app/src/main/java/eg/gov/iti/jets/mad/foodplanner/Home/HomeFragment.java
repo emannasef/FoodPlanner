@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.MealInfoActivity;
+import eg.gov.iti.jets.mad.foodplanner.Model.Category;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
 import eg.gov.iti.jets.mad.foodplanner.Network.Api_Service;
@@ -81,6 +82,11 @@ public class HomeFragment extends Fragment implements Network_Delegate {
 
         mealNameView.setText(myMeal.get(0).strMeal);
         countryMealName.setText(myMeal.get(0).strArea);
+    }
+
+    @Override
+    public void onSuccessCategoryResult(ArrayList<Category> categories) {
+
     }
 
     @Override
