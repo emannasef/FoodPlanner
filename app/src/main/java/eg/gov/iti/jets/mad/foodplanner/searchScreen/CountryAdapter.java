@@ -5,26 +5,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.R;
 
-public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder>{
+public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
 
     private final Context context;
+    private ArrayList<Meal> countries;
+    private CountryClickListener countryClickListener;
 
-    private List<country> countries;
-    countryClickListener countryClickListener;
-
-    public CountryAdapter(Context context, List<country> countries,countryClickListener countryClickListener) {
+    public CountryAdapter(Context context, ArrayList<Meal> countries, CountryClickListener countryClickListener) {
         this.context = context;
         this.countries = countries;
-        this.countryClickListener= countryClickListener;
+        this.countryClickListener = countryClickListener;
     }
 
     @NonNull
@@ -39,11 +41,13 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull CountryAdapter.ViewHolder holder, int position) {
-        holder.imageView.setImageResource(countries.get(position).getImageId());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        
+        Meal country = countries.get(position);
+        holder.countryName.setText(countries.get(position).getStrArea());
+        holder.rowLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                countryClickListener.onCountryClick(countries.get(position));
+                countryClickListener.onCountryClick(country);
             }
         });
     }
@@ -52,13 +56,11 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     public int getItemCount() {
         return countries.size();
     }
-    public interface countryClickListener{
-        void onCountryClick(country obj);
-    }
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView imageView;
-
+        TextView countryName;
         public ConstraintLayout rowLayout;
         public View v;
 
@@ -66,9 +68,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             v = itemView;
-            imageView=itemView.findViewById(R.id.category_contry_ImageView);
-            rowLayout=itemView.findViewById(R.id.category_country_card);
-
+            rowLayout = itemView.findViewById(R.id.category_country_card);
+            countryName = itemView.findViewById(R.id.category_contry_textView);
         }
     }
 }

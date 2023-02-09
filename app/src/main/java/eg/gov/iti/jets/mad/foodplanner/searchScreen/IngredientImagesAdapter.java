@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -13,9 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.Ingredient;
-import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.IngredientAdapter;
-import eg.gov.iti.jets.mad.foodplanner.MealPlan.Week;
 import eg.gov.iti.jets.mad.foodplanner.R;
 
 public class IngredientImagesAdapter extends RecyclerView.Adapter<IngredientImagesAdapter.ViewHolder>{

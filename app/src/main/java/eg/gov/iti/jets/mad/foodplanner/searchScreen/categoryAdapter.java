@@ -40,11 +40,11 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull categoryAdapter.ViewHolder holder, int position) {
-        holder.imageView.setImageResource(categories.get(position).getImageId());
+//        holder.imageView.setImageResource(categories.get(position).getImageId());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                categoryClickListener.onCategoryClick(categories.get(position));
+             //   categoryClickListener.onCategoryClick(categories.get(position));
             }
         });
     }
@@ -68,7 +68,7 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             v = itemView;
-            imageView=itemView.findViewById(R.id.category_contry_ImageView);
+           // imageView=itemView.findViewById(R.id.category_contry_ImageView);
             rowLayout=itemView.findViewById(R.id.category_country_card);
 
         }

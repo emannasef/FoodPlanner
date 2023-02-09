@@ -19,10 +19,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
+import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
+import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
 import eg.gov.iti.jets.mad.foodplanner.R;
 import eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.ResultSearchActivity;
 
-public class searchFragment extends Fragment {
+public class searchFragment extends Fragment implements Network_Delegate ,CountryClickListener{
 
     RecyclerView recyclerView;
     RecyclerView category_recyclerView;
@@ -31,6 +34,11 @@ public class searchFragment extends Fragment {
     CountryAdapter countryAdapter;
     IngredientImagesAdapter ingredientAdapter;
     EditText search_editText;
+
+    Api_Client api_client;
+    ArrayList<Meal> countries = new ArrayList();
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +55,8 @@ public class searchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        api_client = Api_Client.getInstance();
+        api_client.getAreaCall(this);
         recyclerView = view.findViewById(R.id.ingredient_recycleView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -66,15 +76,15 @@ public class searchFragment extends Fragment {
         country_recyclerView.setLayoutManager(layoutManager_country);
 
         ArrayList input = new ArrayList<IngredientImg>();
-        IngredientImg ingredient1 = new IngredientImg( R.drawable.welcome_original_img);
-        IngredientImg ingredient2 = new IngredientImg( R.drawable.onion);
-        IngredientImg ingredient3 = new IngredientImg( R.drawable.garlic);
-        IngredientImg ingredient4 = new IngredientImg( R.drawable.garlic);
-        IngredientImg ingredient5 = new IngredientImg( R.drawable.onion);
-        IngredientImg ingredient6 = new IngredientImg( R.drawable.garlic);
-        IngredientImg ingredient7 = new IngredientImg( R.drawable.garlic);
-        IngredientImg ingredient8 = new IngredientImg( R.drawable.onion);
-        IngredientImg ingredient9 = new IngredientImg( R.drawable.garlic);
+        IngredientImg ingredient1 = new IngredientImg(R.drawable.welcome_original_img);
+        IngredientImg ingredient2 = new IngredientImg(R.drawable.onion);
+        IngredientImg ingredient3 = new IngredientImg(R.drawable.garlic);
+        IngredientImg ingredient4 = new IngredientImg(R.drawable.garlic);
+        IngredientImg ingredient5 = new IngredientImg(R.drawable.onion);
+        IngredientImg ingredient6 = new IngredientImg(R.drawable.garlic);
+        IngredientImg ingredient7 = new IngredientImg(R.drawable.garlic);
+        IngredientImg ingredient8 = new IngredientImg(R.drawable.onion);
+        IngredientImg ingredient9 = new IngredientImg(R.drawable.garlic);
 
         input.add(ingredient1);
         input.add(ingredient2);
@@ -87,15 +97,15 @@ public class searchFragment extends Fragment {
         input.add(ingredient9);
 
         ArrayList categories = new ArrayList<category>();
-        category categories1 = new category( R.drawable.welcome_original_img);
-        category categories2 = new category( R.drawable.welcome_original_img);
-        category categories3 = new category( R.drawable.welcome_original_img);
-        category categories4 = new category( R.drawable.welcome_original_img);
-        category categories5 = new category( R.drawable.welcome_original_img);
-        category categories6 = new category( R.drawable.welcome_original_img);
-        category categories7 = new category( R.drawable.welcome_original_img);
-        category categories8 = new category( R.drawable.welcome_original_img);
-        category categories9 = new category( R.drawable.welcome_original_img);
+        category categories1 = new category(R.drawable.welcome_original_img);
+        category categories2 = new category(R.drawable.welcome_original_img);
+        category categories3 = new category(R.drawable.welcome_original_img);
+        category categories4 = new category(R.drawable.welcome_original_img);
+        category categories5 = new category(R.drawable.welcome_original_img);
+        category categories6 = new category(R.drawable.welcome_original_img);
+        category categories7 = new category(R.drawable.welcome_original_img);
+        category categories8 = new category(R.drawable.welcome_original_img);
+        category categories9 = new category(R.drawable.welcome_original_img);
 
         categories.add(categories1);
         categories.add(categories2);
@@ -107,31 +117,10 @@ public class searchFragment extends Fragment {
         categories.add(categories8);
         categories.add(categories9);
 
-
-        ArrayList countries = new ArrayList<country>();
-        country country1 = new country( R.drawable.welcome_original_img);
-        country country2 = new country( R.drawable.welcome_original_img);
-        country country3 = new country( R.drawable.welcome_original_img);
-        country country4 = new country( R.drawable.welcome_original_img);
-        country country5 = new country( R.drawable.welcome_original_img);
-        country country6 = new country( R.drawable.welcome_original_img);
-        country country7 = new country( R.drawable.welcome_original_img);
-        country country8 = new country( R.drawable.welcome_original_img);
-        country country9 = new country( R.drawable.welcome_original_img);
-
-        countries.add(country1);
-        countries.add(country2);
-        countries.add(country3);
-        countries.add(country4);
-        countries.add(country5);
-        countries.add(country6);
-        countries.add(country7);
-        countries.add(country8);
-        countries.add(country9);
         ingredientAdapter = new IngredientImagesAdapter(getContext(), input, new IngredientImagesAdapter.igredientClickListener() {
             @Override
             public void onIngrediantClick(IngredientImg ingredientImg) {
-                Intent i = new Intent(getContext(),ResultSearchActivity.class);
+                Intent i = new Intent(getContext(), ResultSearchActivity.class);
                 startActivity(i);
             }
         });
@@ -140,32 +129,47 @@ public class searchFragment extends Fragment {
         categoryAdapter = new categoryAdapter(getContext(), categories, new categoryAdapter.categoryClickListener() {
             @Override
             public void onCategoryClick(category obj) {
-                Intent i = new Intent(getContext(),ResultSearchActivity.class);
+                Intent i = new Intent(getContext(), ResultSearchActivity.class);
                 startActivity(i);
             }
         });
         category_recyclerView.setAdapter(categoryAdapter);
 
-        countryAdapter = new CountryAdapter(getContext(), countries, new CountryAdapter.countryClickListener() {
-            @Override
-            public void onCountryClick(country obj) {
-                Intent i = new Intent(getContext(),ResultSearchActivity.class);
-                startActivity(i);
-            }
-        });
+
+        countryAdapter = new CountryAdapter(getContext(),countries,this);
         country_recyclerView.setAdapter(countryAdapter);
 
-        search_editText=view.findViewById(R.id.search_EditText);
+        search_editText = view.findViewById(R.id.search_EditText);
         search_editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId== EditorInfo.IME_ACTION_SEARCH){
-                    Intent i =new Intent(getContext(), ResultSearchActivity.class);
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    Intent i = new Intent(getContext(), ResultSearchActivity.class);
                     startActivity(i);
                 }
                 return false;
             }
         });
 
+    }
+
+    @Override
+    public void onSuccessResult(ArrayList<Meal> myMeal) {
+        for (Meal country : myMeal) {
+            System.out.println(country);
+            countries.add(country);
+            countryAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onFailureResult(String errorMessage) {
+
+    }
+
+    @Override
+    public void onCountryClick(Meal meal) {
+        Intent i = new Intent(getContext(),ResultSearchActivity.class);
+        startActivity(i);
     }
 }
