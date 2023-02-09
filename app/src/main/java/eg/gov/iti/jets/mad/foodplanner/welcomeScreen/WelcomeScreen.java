@@ -27,11 +27,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
-import eg.gov.iti.jets.mad.foodplanner.Home.HomeFragment;
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.Model.User;
 import eg.gov.iti.jets.mad.foodplanner.R;
-import eg.gov.iti.jets.mad.foodplanner.loginScreen.LoginScreenActivity;
+import eg.gov.iti.jets.mad.foodplanner.loginScreen.view.LoginScreenActivity;
 import eg.gov.iti.jets.mad.foodplanner.signupScreen.SignupScreen;
 
 public class WelcomeScreen extends AppCompatActivity {

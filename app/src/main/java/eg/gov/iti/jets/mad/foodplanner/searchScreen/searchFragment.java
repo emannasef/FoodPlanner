@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -20,7 +19,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.MealInfoActivity;
 import eg.gov.iti.jets.mad.foodplanner.R;
 import eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.ResultSearchActivity;
 

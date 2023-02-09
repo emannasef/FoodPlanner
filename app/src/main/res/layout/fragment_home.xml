@@ -10,7 +10,7 @@
         android:id="@+id/thisWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="48dp"
         android:text="@string/Daily_Inspiration"
         android:textColor="#000000"
@@ -52,31 +52,33 @@
                 app:srcCompat="@drawable/mealinfo" />
 
             <TextView
-                android:id="@+id/home_card_title_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:id="@+id/home_meal_name_textview"
+                android:layout_width="225dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="4dp"
+                android:inputType="textMultiLine"
                 android:text="@string/Name"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.191"
+                app:layout_constraintHorizontal_bias="0.344"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/home_card_imageview" />
 
             <TextView
-                android:id="@+id/home_card_category_textView"
+                android:id="@+id/home_countryNameOfMeal_textView"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="4dp"
                 android:text="@string/Country_Name"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/home_card_title_textview"
-                app:layout_constraintTop_toBottomOf="@id/home_card_title_textview" />
+                app:layout_constraintStart_toStartOf="@+id/home_meal_name_textview"
+                app:layout_constraintTop_toBottomOf="@id/home_meal_name_textview" />
 
             <ImageView
                 android:id="@+id/home_card_fav_imageview"
@@ -96,21 +98,20 @@
                 android:layout_height="18dp"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/fork_knife_icon"
-                app:layout_constraintEnd_toStartOf="@+id/home_card_title_textview"
+                app:layout_constraintEnd_toStartOf="@+id/home_meal_name_textview"
                 app:layout_constraintHorizontal_bias="0.516"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/home_card_title_textview" />
+                app:layout_constraintTop_toTopOf="@+id/home_meal_name_textview" />
 
             <ImageView
                 android:id="@+id/imageView8"
                 android:layout_width="26dp"
                 android:layout_height="18dp"
-                android:layout_marginTop="24dp"
                 android:src="@drawable/flag_icon"
-                app:layout_constraintEnd_toStartOf="@+id/home_card_category_textView"
+                app:layout_constraintEnd_toStartOf="@+id/home_countryNameOfMeal_textView"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/imageView6"
-                app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+                app:layout_constraintTop_toTopOf="@+id/home_countryNameOfMeal_textView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

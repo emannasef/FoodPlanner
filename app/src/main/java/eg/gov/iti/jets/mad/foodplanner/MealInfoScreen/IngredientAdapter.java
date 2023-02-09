@@ -11,22 +11,23 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import java.util.ArrayList;
 
 import eg.gov.iti.jets.mad.foodplanner.R;
 
-public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.ViewHolder>{
+public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.ViewHolder> {
 
     private final Context context;
-
-    private List<Ingredient> ingredients;
-
-
-    public IngredientAdapter(Context context, List<Ingredient> ingredients) {
+    private ArrayList<String> ingredientArrayList;
+    private ArrayList<String> measureArrayList;
+    public IngredientAdapter(Context context, ArrayList<String> ingredientArrayList,ArrayList<String> measureArrayList) {
         this.context = context;
-        this.ingredients = ingredients;
+        this.ingredientArrayList = ingredientArrayList;
+        this.measureArrayList=measureArrayList;
     }
-
 
     @NonNull
     @Override
@@ -34,31 +35,28 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.ingredient_row_layout, parent, false);
         ViewHolder myViewHolder = new ViewHolder(v);
-
         return myViewHolder;
     }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.quantity.setText(ingredients.get(position).getQuantity());
-        holder.name.setText(ingredients.get(position).getName());
-        holder.imageView.setImageResource(ingredients.get(position).getImageId());
-    }
+
+        holder.name.setText(ingredientArrayList.get(position));
+        holder.quantity.setText(measureArrayList.get(position));
+        Glide.with(context).load("https://www.themealdb.com/images/ingredients/"+ingredientArrayList.get(position)+ "-Small.png").apply(new RequestOptions().override(150, 150).placeholder(R.drawable.mealinfo)).into(holder.imageView);
+        }
 
     @Override
     public int getItemCount() {
-        return ingredients.size();
+        return measureArrayList.size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView quantity;
         public TextView name;
         public ImageView imageView;
-
         public ConstraintLayout rowLayout;
         public View v;
-
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             v = itemView;

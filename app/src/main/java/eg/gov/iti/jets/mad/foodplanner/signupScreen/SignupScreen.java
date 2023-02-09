@@ -23,7 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.Model.User;
 import eg.gov.iti.jets.mad.foodplanner.R;
-import eg.gov.iti.jets.mad.foodplanner.loginScreen.LoginScreenActivity;
 import eg.gov.iti.jets.mad.foodplanner.welcomeScreen.WelcomeScreen;
 
 public class SignupScreen extends AppCompatActivity {
