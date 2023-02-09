@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.R;
+import eg.gov.iti.jets.mad.foodplanner.loginScreen.SharedPref;
 import eg.gov.iti.jets.mad.foodplanner.loginScreen.presenter.LoginPresenter;
 import eg.gov.iti.jets.mad.foodplanner.welcomeScreen.WelcomeScreen;
 
@@ -26,6 +27,8 @@ public class LoginScreenActivity extends AppCompatActivity implements LoginViewI
 
     LoginPresenter loginPresenter;
 
+    SharedPref sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +39,14 @@ public class LoginScreenActivity extends AppCompatActivity implements LoginViewI
         passwordEditText = findViewById(R.id.passwordEditText);
 
         loginPresenter = new LoginPresenter(this);
+        sharedPref = new SharedPref(this);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 loginPresenter.Login(email,password);
-
+                sharedPref.write(email);
             }
         });
 

@@ -10,14 +10,17 @@ import android.widget.TextView;
 
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.R;
+import eg.gov.iti.jets.mad.foodplanner.loginScreen.SharedPref;
 import eg.gov.iti.jets.mad.foodplanner.loginScreen.view.LoginScreenActivity;
 import eg.gov.iti.jets.mad.foodplanner.signupScreen.SignupScreen;
+import eg.gov.iti.jets.mad.foodplanner.splashScreen.view.SplashScreen;
 
 public class WelcomeScreen extends AppCompatActivity {
 TextView alreadyHaveAnAccountTextView;
     TextView loginTextView;
     Button skip ;
     Button signUpBtn;
+    private SharedPref sharedPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +29,7 @@ TextView alreadyHaveAnAccountTextView;
         loginTextView=findViewById(R.id.login_TextView);
         signUpBtn=findViewById(R.id.signupWithEmail_btn);
         skip=findViewById(R.id.skip_btn);
+        sharedPref = new SharedPref(this);
         alreadyHaveAnAccountTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +51,7 @@ TextView alreadyHaveAnAccountTextView;
             public void onClick(View v) {
                 Intent i =new Intent(WelcomeScreen.this, MainActivity.class);
                 startActivity(i);
+                sharedPref.write("guest");
             }
         });
 
