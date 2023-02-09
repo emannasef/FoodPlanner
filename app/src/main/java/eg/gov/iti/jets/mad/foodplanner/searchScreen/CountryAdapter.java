@@ -41,9 +41,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull CountryAdapter.ViewHolder holder, int position) {
-        
         Meal country = countries.get(position);
-        holder.countryName.setText(countries.get(position).getStrArea());
+        holder.countryName.setText(countries.get(position).strArea);
         holder.rowLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

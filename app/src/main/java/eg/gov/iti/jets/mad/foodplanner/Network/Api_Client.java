@@ -25,13 +25,13 @@ public class Api_Client {
             client = new Api_Client();
         return client;
     }
-    public void mealInfoCall(Network_Delegate network) {
+    public void mealInfoCall(Network_Delegate network ,String name) {
         Gson gson = new GsonBuilder().create();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(base_Url)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create()).build();
         api_service = retrofit.create(Api_Service.class);
-        Single<Root> Meals = api_service.getMealInfo();
+        Single<Root> Meals = api_service.getMealInfoByName(name);
 
         Meals.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -59,7 +59,6 @@ public class Api_Client {
                 );
     }
 
-
     public void getAreaCall(Network_Delegate network) {
         Gson gson = new GsonBuilder().create();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(base_Url)
@@ -76,7 +75,4 @@ public class Api_Client {
                         e -> e.printStackTrace()
                 );
     }
-
-
-
 }

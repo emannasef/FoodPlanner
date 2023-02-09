@@ -1,14 +1,27 @@
 package eg.gov.iti.jets.mad.foodplanner.signupScreen;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.FirebaseDatabase;
 
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
+import eg.gov.iti.jets.mad.foodplanner.Model.User;
 import eg.gov.iti.jets.mad.foodplanner.R;
 import eg.gov.iti.jets.mad.foodplanner.welcomeScreen.WelcomeScreen;
 
@@ -16,19 +29,80 @@ public class SignupScreen extends AppCompatActivity {
 
     Button signUpBtn;
     ImageButton backBtn;
+    FirebaseAuth auth;
+    EditText name_editText;
+    EditText email_editText;
+    EditText password_editText;
+    EditText confirmPassword_editText;
+    FirebaseDatabase database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_screen);
-
+        name_editText =findViewById(R.id.name_EditText);
+        email_editText =findViewById(R.id.email_EditText);
+        password_editText=findViewById(R.id.password_EditText);
+        confirmPassword_editText=findViewById(R.id.confirmPassword_EditText);
+        auth=FirebaseAuth.getInstance();
         signUpBtn = findViewById(R.id.next_btn);
         backBtn=findViewById(R.id.back_btn);
+        database=FirebaseDatabase.getInstance("https://foodplanner-78891-default-rtdb.firebaseio.com/");
+
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =new Intent(SignupScreen.this, MainActivity.class);
-                startActivity(i);
+                String name =name_editText.getText().toString();
+                String email =email_editText.getText().toString();
+                String password =password_editText.getText().toString();
+                String confirmPassword =confirmPassword_editText.getText().toString();
+                if(!name.isEmpty()&&!email.isEmpty()&&password.equals(confirmPassword)&&!password.isEmpty()) {
+                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                User user1=new User();
+                                assert user1 != null;
+                                user1.setEmail(email);
+                                user1.setName(name);
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
+                                auth.getCurrentUser().updateProfile(profileUpdates);
+
+                                database.getReference().child("User").child(name).setValue(user1);
+
+                                Toast.makeText(SignupScreen.this, "SignUp Successful"+name, Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(SignupScreen.this, MainActivity.class);
+                                startActivity(i);
+                            } else {
+                                Toast.makeText(SignupScreen.this, "SignUp Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    });
+                }else{
+                    if((name.isEmpty()||name==null)&&(email.isEmpty()||email==null)&&(password.isEmpty()||password==null)&&(confirmPassword.isEmpty()||confirmPassword==null)){
+                        name_editText.setError("Name can't be empty");
+                        email_editText.setError("Email can't be empty");
+                        password_editText.setError("Password can't be empty");
+                        confirmPassword_editText.setError("Confirm password can't be empty");
+
+                    }
+                    else{
+                        if(email.isEmpty()||email==null){
+                            email_editText.setError("Email can't be empty");
+                        }
+                        if(password.isEmpty()||password==null){
+                            password_editText.setError("Password can't be empty");
+                        }
+                        if(confirmPassword.isEmpty()||confirmPassword==null){
+                            confirmPassword_editText.setError("Confirm password can't be empty");
+                        }
+                        if(!password.equals(confirmPassword)){
+                            password_editText.setError("Password and Comfirm Password should be the same");
+                            confirmPassword_editText.setError("Password and Comfirm Password should be the same");
+                        }
+                    }
+                }
             }
         });
 
