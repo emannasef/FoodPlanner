@@ -36,8 +36,12 @@ public class ResultSearchActivity extends AppCompatActivity implements Network_D
         intent=getIntent();
 
         api_client=Api_Client.getInstance();
-        api_client.searchBycategoryCall(this,intent.getStringExtra("search"));
-
+        if(intent.getStringExtra("searchType").equals("category")) {
+             api_client.searchBycategoryCall(this,intent.getStringExtra("search"));
+        }
+        else if(intent.getStringExtra("searchType").equals("name")) {
+            api_client.mealInfoCall(this, intent.getStringExtra("searchName"));
+        }
         backResult_btn=findViewById(R.id.backResult_btn);
         recyclerView = findViewById(R.id.resultRecyclerView);
         recyclerView.setHasFixedSize(true);

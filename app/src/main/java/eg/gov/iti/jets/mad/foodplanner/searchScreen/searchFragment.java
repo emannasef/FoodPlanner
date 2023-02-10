@@ -138,6 +138,8 @@ public class searchFragment extends Fragment implements Network_Delegate {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId== EditorInfo.IME_ACTION_SEARCH){
                     Intent i =new Intent(getContext(), ResultSearchActivity.class);
+                    i.putExtra("searchType","name");
+                    i.putExtra("searchName",search_editText.getText().toString());
                     startActivity(i);
                 }
                 return false;
@@ -158,6 +160,7 @@ public class searchFragment extends Fragment implements Network_Delegate {
             @Override
             public void onCategoryClick(Category obj) {
                 Intent i = new Intent(getContext(),ResultSearchActivity.class);
+                i.putExtra("searchType","category");
                 i.putExtra("search",obj.strCategory);
                 startActivity(i);
             }
