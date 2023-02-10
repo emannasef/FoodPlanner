@@ -7,6 +7,7 @@ public class Meal {
     public String idMeal;
     public String strMeal;
     public String strCategory;
+    public String strIngredient;
     public String strArea;
     public String strInstructions;
     public String strMealThumb;

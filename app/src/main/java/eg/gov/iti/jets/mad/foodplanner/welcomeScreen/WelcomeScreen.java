@@ -1,9 +1,7 @@
 package eg.gov.iti.jets.mad.foodplanner.welcomeScreen;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatImageButton;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +11,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
@@ -27,13 +27,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
+
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.Model.User;
 import eg.gov.iti.jets.mad.foodplanner.R;
 import eg.gov.iti.jets.mad.foodplanner.loginScreen.SharedPref;
 import eg.gov.iti.jets.mad.foodplanner.loginScreen.view.LoginScreenActivity;
 import eg.gov.iti.jets.mad.foodplanner.signupScreen.SignupScreen;
-import eg.gov.iti.jets.mad.foodplanner.splashScreen.view.SplashScreen;
+
 
 public class WelcomeScreen extends AppCompatActivity {
 TextView alreadyHaveAnAccountTextView;

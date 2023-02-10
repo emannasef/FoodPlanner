@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
 import eg.gov.iti.jets.mad.foodplanner.R;
 import eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.ResultSearchActivity;
 
-public class searchFragment extends Fragment implements Network_Delegate ,CountryClickListener{
+public class searchFragment extends Fragment implements Network_Delegate, CountryClickListener, IngredientClickListener {
 
     RecyclerView recyclerView;
     RecyclerView category_recyclerView;
@@ -37,7 +38,7 @@ public class searchFragment extends Fragment implements Network_Delegate ,Countr
 
     Api_Client api_client;
     ArrayList<Meal> countries = new ArrayList();
-
+    ArrayList<Meal> ingredients = new ArrayList();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,12 +57,15 @@ public class searchFragment extends Fragment implements Network_Delegate ,Countr
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         api_client = Api_Client.getInstance();
+
         api_client.getAreaCall(this);
+        api_client.getIngredientCall(this);
+
         recyclerView = view.findViewById(R.id.ingredient_recycleView);
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(layoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
+        LinearLayoutManager ingredientLayoutManager = new LinearLayoutManager(getContext());
+        ingredientLayoutManager.setOrientation(ingredientLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(ingredientLayoutManager);
 
         category_recyclerView = view.findViewById(R.id.category_recycleView);
         category_recyclerView.setHasFixedSize(true);
@@ -75,26 +79,6 @@ public class searchFragment extends Fragment implements Network_Delegate ,Countr
         layoutManager_country.setOrientation(layoutManager_country.HORIZONTAL);
         country_recyclerView.setLayoutManager(layoutManager_country);
 
-        ArrayList input = new ArrayList<IngredientImg>();
-        IngredientImg ingredient1 = new IngredientImg(R.drawable.welcome_original_img);
-        IngredientImg ingredient2 = new IngredientImg(R.drawable.onion);
-        IngredientImg ingredient3 = new IngredientImg(R.drawable.garlic);
-        IngredientImg ingredient4 = new IngredientImg(R.drawable.garlic);
-        IngredientImg ingredient5 = new IngredientImg(R.drawable.onion);
-        IngredientImg ingredient6 = new IngredientImg(R.drawable.garlic);
-        IngredientImg ingredient7 = new IngredientImg(R.drawable.garlic);
-        IngredientImg ingredient8 = new IngredientImg(R.drawable.onion);
-        IngredientImg ingredient9 = new IngredientImg(R.drawable.garlic);
-
-        input.add(ingredient1);
-        input.add(ingredient2);
-        input.add(ingredient3);
-        input.add(ingredient4);
-        input.add(ingredient5);
-        input.add(ingredient6);
-        input.add(ingredient7);
-        input.add(ingredient8);
-        input.add(ingredient9);
 
         ArrayList categories = new ArrayList<category>();
         category categories1 = new category(R.drawable.welcome_original_img);
@@ -116,16 +100,6 @@ public class searchFragment extends Fragment implements Network_Delegate ,Countr
         categories.add(categories7);
         categories.add(categories8);
         categories.add(categories9);
-
-        ingredientAdapter = new IngredientImagesAdapter(getContext(), input, new IngredientImagesAdapter.igredientClickListener() {
-            @Override
-            public void onIngrediantClick(IngredientImg ingredientImg) {
-                Intent i = new Intent(getContext(), ResultSearchActivity.class);
-                startActivity(i);
-            }
-        });
-        recyclerView.setAdapter(ingredientAdapter);
-
         categoryAdapter = new categoryAdapter(getContext(), categories, new categoryAdapter.categoryClickListener() {
             @Override
             public void onCategoryClick(category obj) {
@@ -135,8 +109,10 @@ public class searchFragment extends Fragment implements Network_Delegate ,Countr
         });
         category_recyclerView.setAdapter(categoryAdapter);
 
+        ingredientAdapter = new IngredientImagesAdapter(getContext(), ingredients, this);
+        recyclerView.setAdapter(ingredientAdapter);
 
-        countryAdapter = new CountryAdapter(getContext(),countries,this);
+        countryAdapter = new CountryAdapter(getContext(), countries, this);
         country_recyclerView.setAdapter(countryAdapter);
 
         search_editText = view.findViewById(R.id.search_EditText);
@@ -155,11 +131,19 @@ public class searchFragment extends Fragment implements Network_Delegate ,Countr
 
     @Override
     public void onSuccessResult(ArrayList<Meal> myMeal) {
+        for (Meal ingredient : myMeal) {
+            //   System.out.println("################"+ingredient.strIngredient);
+            if (ingredient.strIngredient != null) {
+                ingredients.add(ingredient);
+                ingredientAdapter.notifyDataSetChanged();
+            }
+        }
         for (Meal country : myMeal) {
-            System.out.println(country);
+            // System.out.println(country);
             countries.add(country);
             countryAdapter.notifyDataSetChanged();
         }
+
     }
 
     @Override
@@ -168,8 +152,21 @@ public class searchFragment extends Fragment implements Network_Delegate ,Countr
     }
 
     @Override
-    public void onCountryClick(Meal meal) {
-        Intent i = new Intent(getContext(),ResultSearchActivity.class);
-        startActivity(i);
+    public void onCountryClick(Meal country) {
+        Intent intent = new Intent(getContext(), ResultSearchActivity.class);
+        intent.putExtra("countryName", country.strArea);
+        intent.putExtra("searchType","countryName");
+        // System.out.println("##############"+country.strArea);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onIngredientClick(Meal ingredient) {
+
+        Toast.makeText(getContext(), ingredient.strIngredient, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getContext(), ResultSearchActivity.class);
+        intent.putExtra("ingredientName", ingredient.strIngredient);
+        intent.putExtra("searchType","ingredientName");
+        startActivity(intent);
     }
 }

@@ -5,27 +5,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import java.util.ArrayList;
 import java.util.List;
 
+import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.R;
 
 public class IngredientImagesAdapter extends RecyclerView.Adapter<IngredientImagesAdapter.ViewHolder>{
 
     private final Context context;
+    private ArrayList<Meal> ingredients;
 
-    private List<IngredientImg> ingredients;
+    IngredientClickListener ingredientClickListener;
 
-    igredientClickListener igredientClickListener;
-
-    public IngredientImagesAdapter(Context context, List<IngredientImg> ingredients,igredientClickListener igredientClickListener) {
+    public IngredientImagesAdapter(Context context, ArrayList<Meal> ingredients,IngredientClickListener ingredientClickListener) {
         this.context = context;
         this.ingredients = ingredients;
-        this.igredientClickListener=igredientClickListener;
+        this.ingredientClickListener=ingredientClickListener;
     }
 
     @NonNull
@@ -40,13 +45,15 @@ public class IngredientImagesAdapter extends RecyclerView.Adapter<IngredientImag
 
     @Override
     public void onBindViewHolder(@NonNull IngredientImagesAdapter.ViewHolder holder, int position) {
-        holder.imageView.setImageResource(ingredients.get(position).getImageId());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                igredientClickListener.onIngrediantClick(ingredients.get(position));
-            }
-        });
+        Meal ingredient= ingredients.get(position);
+
+        Glide.with(context).load("https://www.themealdb.com/images/ingredients/"+ingredients.get(position).strIngredient+ "-Small.png").apply(new RequestOptions().override(150, 150).placeholder(R.drawable.mealinfo)).into(holder.ingredientImageView);
+        holder.rowLayout.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               ingredientClickListener.onIngredientClick(ingredient);
+           }
+       });
     }
 
     @Override
@@ -54,13 +61,9 @@ public class IngredientImagesAdapter extends RecyclerView.Adapter<IngredientImag
         return ingredients.size();
     }
 
-    public interface igredientClickListener{
-        void onIngrediantClick(IngredientImg ingredientImg);
-    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-
-        public ImageView imageView;
-
+        public ImageView ingredientImageView;
         public ConstraintLayout rowLayout;
         public View v;
 
@@ -68,9 +71,8 @@ public class IngredientImagesAdapter extends RecyclerView.Adapter<IngredientImag
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             v = itemView;
-            imageView=itemView.findViewById(R.id.ingredient_imageView);
+            ingredientImageView=itemView.findViewById(R.id.ingredient_imageView);
             rowLayout=itemView.findViewById(R.id.ingredientCard);
-
         }
     }
 }

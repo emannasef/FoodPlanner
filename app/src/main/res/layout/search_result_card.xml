@@ -28,9 +28,9 @@
 
         <TextView
             android:id="@+id/resultName_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_width="132dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="8dp"
             android:text="@string/Name"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
@@ -41,38 +41,20 @@
             android:layout_width="30dp"
             android:layout_height="22dp"
             android:layout_gravity="start|center"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/result_ImageView"
             app:srcCompat="@drawable/fork_knife_icon" />
 
         <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="26dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="14dp"
-            app:layout_constraintStart_toStartOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4"
-            app:srcCompat="@drawable/flag_icon" />
-
-        <TextView
-            android:id="@+id/resultCountry_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/Country_Name"
-            app:layout_constraintStart_toStartOf="@+id/resultName_textView"
-            app:layout_constraintTop_toBottomOf="@+id/resultName_textView" />
-
-        <ImageView
             android:id="@+id/heartOutlineResult_ImageView"
             android:layout_width="38dp"
             android:layout_height="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/result_ImageView"
+            app:layout_constraintTop_toBottomOf="@+id/resultName_textView"
             app:srcCompat="@drawable/favorite_outline_icon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

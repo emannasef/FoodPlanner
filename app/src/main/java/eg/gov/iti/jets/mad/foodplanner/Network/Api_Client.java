@@ -18,6 +18,7 @@ public class Api_Client {
     Api_Service api_service;
 
     private static final String base_Url = "https://www.themealdb.com/api/json/v1/1/";
+
     private static Api_Client client = null;
     public static Api_Client getInstance()
     {
@@ -75,4 +76,58 @@ public class Api_Client {
                         e -> e.printStackTrace()
                 );
     }
+
+    public void getMealsByCountryCall(Network_Delegate network ,String countryName) {
+        Gson gson = new GsonBuilder().create();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(base_Url)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create()).build();
+        api_service = retrofit.create(Api_Service.class);
+        Single<Root> Meals = api_service.getMealsByCountry(countryName);
+
+        Meals.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item -> {
+                            network.onSuccessResult(item.getMeals());
+                        },
+                        e -> e.printStackTrace()
+                );
+    }
+
+
+    public void getIngredientCall(Network_Delegate network) {
+        Gson gson = new GsonBuilder().create();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(base_Url)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create()).build();
+        api_service = retrofit.create(Api_Service.class);
+        Single<Root> Meals = api_service.getIngredient();
+
+        Meals.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item -> {
+                            network.onSuccessResult(item.getMeals());
+                        },
+                        e -> e.printStackTrace()
+                );
+    }
+
+
+    public void getMealsByIngredientCall(Network_Delegate network ,String ingredientName) {
+        Gson gson = new GsonBuilder().create();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(base_Url)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create()).build();
+        api_service = retrofit.create(Api_Service.class);
+        Single<Root> Meals = api_service.getMealsByIngredient(ingredientName);
+
+        Meals.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item -> {
+                            network.onSuccessResult(item.getMeals());
+                        },
+                        e -> e.printStackTrace()
+                );
+    }
+
 }

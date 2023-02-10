@@ -58,6 +58,7 @@ public class MealInfoActivity extends AppCompatActivity implements Network_Deleg
         api_client.mealInfoCall(this,intent.getStringExtra("mealName"));
 
 
+
         recyclerView = findViewById(R.id.ingredientRecycleView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

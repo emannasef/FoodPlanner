@@ -11,8 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
-import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.R;
@@ -43,6 +45,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     public void onBindViewHolder(@NonNull CountryAdapter.ViewHolder holder, int position) {
         Meal country = countries.get(position);
         holder.countryName.setText(countries.get(position).strArea);
+
         holder.rowLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +65,6 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         TextView countryName;
         public ConstraintLayout rowLayout;
         public View v;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
