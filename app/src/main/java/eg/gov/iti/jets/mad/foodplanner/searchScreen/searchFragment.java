@@ -139,9 +139,10 @@ public class searchFragment extends Fragment implements Network_Delegate, Countr
             }
         }
         for (Meal country : myMeal) {
-            // System.out.println(country);
+            System.out.println("########################"+country);
             countries.add(country);
-            countryAdapter.notifyDataSetChanged();
+            if (countries.size()<=27){
+            countryAdapter.notifyDataSetChanged();}
         }
 
     }
