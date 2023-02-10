@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -20,28 +21,19 @@ import eg.gov.iti.jets.mad.foodplanner.R;
 
 
 public class MealPlanFragment extends Fragment {
-    RecyclerView recyclerView;
-
-    MealPlanAdapter mealPlanAdapter;
+//    RecyclerView recyclerView;
+//
+//    MealPlanAdapter mealPlanAdapter;
 
     public MealPlanFragment() {
         // Required empty public constructor
     }
 
-    public static MealPlanFragment newInstance(String param1, String param2) {
-        MealPlanFragment fragment = new MealPlanFragment();
-        Bundle args = new Bundle();
 
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
     }
 
     @Override
@@ -54,23 +46,23 @@ public class MealPlanFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = view. findViewById(R.id.mealPlanRecyclerView);
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
-        recyclerView.setLayoutManager(layoutManager);
-        ArrayList input = new ArrayList<Week>();
+//        recyclerView = view. findViewById(R.id.mealPlanRecyclerView);
+//        recyclerView.setHasFixedSize(true);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
+//        recyclerView.setLayoutManager(layoutManager);
+//        ArrayList input = new ArrayList<Week>();
+//
+//        Week week3 = new Week("Last Week");
+//        Week week1 = new Week("This Week");
+//        Week week2 = new Week("Next Week");
+//
+//        input.add(week3);
+//        input.add(week1);
+//        input.add(week2);
 
-        Week week3 = new Week("Last Week");
-        Week week1 = new Week("This Week");
-        Week week2 = new Week("Next Week");
 
-        input.add(week3);
-        input.add(week1);
-        input.add(week2);
-
-
-        mealPlanAdapter = new MealPlanAdapter(getContext(),input);
-        recyclerView.setAdapter(mealPlanAdapter);
+//        mealPlanAdapter = new MealPlanAdapter(getContext(),input);
+//        recyclerView.setAdapter(mealPlanAdapter);
 
 
     }

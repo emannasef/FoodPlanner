@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.Model.Category;
+import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.R;
 
 public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHolder>{
@@ -26,9 +27,9 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHo
 
     private ArrayList<Category> categoryArrayList;
 
-    categoryClickListener categoryClickListener;
+    CategoryClickListener categoryClickListener;
 
-    public categoryAdapter(Context context, ArrayList<Category> categoryArrayList,categoryClickListener categoryClickListener) {
+    public categoryAdapter(Context context, ArrayList<Category> categoryArrayList,CategoryClickListener categoryClickListener) {
         this.context = context;
         this.categoryArrayList = categoryArrayList;
         this.categoryClickListener=categoryClickListener;
@@ -46,12 +47,13 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull categoryAdapter.ViewHolder holder, int position) {
+        Category catecoryMeal=categoryArrayList.get(position);
         Glide.with(context).load(categoryArrayList.get(position).strCategoryThumb).apply(new RequestOptions().override(150, 150).placeholder(R.drawable.mealinfo)).into(holder.imageView);
         holder.textView.setText(categoryArrayList.get(position).strCategory);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.rowLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                categoryClickListener.onCategoryClick(categoryArrayList.get(position));
+                categoryClickListener.onCategoryClick(catecoryMeal);
             }
         });
     }
@@ -61,10 +63,7 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHo
         return categoryArrayList.size();
     }
 
-    public interface categoryClickListener{
-        void onCategoryClick(Category obj);
-    }
-    public class ViewHolder extends RecyclerView.ViewHolder {
+     class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imageView;
         public TextView textView;

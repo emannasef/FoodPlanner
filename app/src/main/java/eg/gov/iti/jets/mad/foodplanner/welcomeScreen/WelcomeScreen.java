@@ -1,8 +1,6 @@
 package eg.gov.iti.jets.mad.foodplanner.welcomeScreen;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,8 +9,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
@@ -25,17 +25,21 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
+
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.Model.User;
 import eg.gov.iti.jets.mad.foodplanner.R;
+import eg.gov.iti.jets.mad.foodplanner.loginScreen.SharedPref;
 import eg.gov.iti.jets.mad.foodplanner.loginScreen.view.LoginScreenActivity;
 import eg.gov.iti.jets.mad.foodplanner.signupScreen.view.SignupScreen;
+
 
 public class WelcomeScreen extends AppCompatActivity {
 TextView alreadyHaveAnAccountTextView;
     TextView loginTextView;
     Button skip ;
     Button signUpBtn;
+    private SharedPref sharedPref;
     ImageButton googleBtn;
     private GoogleSignInClient client;
     FirebaseAuth auth;
@@ -45,6 +49,7 @@ TextView alreadyHaveAnAccountTextView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
+        sharedPref = new SharedPref(this);
         alreadyHaveAnAccountTextView=findViewById(R.id.Already_have_an_account_textView);
         loginTextView=findViewById(R.id.login_TextView);
         signUpBtn=findViewById(R.id.signupWithEmail_btn);
@@ -66,6 +71,7 @@ TextView alreadyHaveAnAccountTextView;
                 startActivityForResult(i,123);
             }
         });
+
         alreadyHaveAnAccountTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +93,7 @@ TextView alreadyHaveAnAccountTextView;
             public void onClick(View v) {
                 Intent i =new Intent(WelcomeScreen.this, MainActivity.class);
                 startActivity(i);
+                sharedPref.write("guest");
             }
         });
 
@@ -98,7 +105,6 @@ TextView alreadyHaveAnAccountTextView;
             }
         });
     }
-
 
 
     @Override

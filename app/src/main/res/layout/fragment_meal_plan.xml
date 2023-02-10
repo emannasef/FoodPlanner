@@ -1,13 +1,326 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MealPlan.MealPlanFragment" >
+    tools:context=".MealPlan.MealPlanFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mealPlanRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fridayAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="132dp"
+        android:background="@drawable/button"
+        android:drawableLeft="@drawable/add_icon"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/ADD"
+        app:layout_constraintBottom_toBottomOf="@+id/textView13"
+        app:layout_constraintStart_toEndOf="@+id/textView13"
+        app:layout_constraintTop_toTopOf="@+id/textView13"
+        app:layout_constraintVertical_bias="0.181" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saturdayAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="112dp"
+        android:background="@drawable/button"
+        android:drawableLeft="@drawable/add_icon"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/ADD"
+        app:layout_constraintBottom_toBottomOf="@+id/textView14"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="@+id/textView14"
+        app:layout_constraintVertical_bias="0.181" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/sundayAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/button"
+        android:drawableLeft="@drawable/add_icon"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/ADD"
+        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView15"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/thursdayAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="112dp"
+        android:background="@drawable/button"
+        android:drawableLeft="@drawable/add_icon"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/ADD"
+        app:layout_constraintBottom_toBottomOf="@+id/textView12"
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="@+id/textView12"
+        app:layout_constraintVertical_bias="0.454" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/wednesdayAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="96dp"
+        android:background="@drawable/button"
+        android:drawableLeft="@drawable/add_icon"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/ADD"
+        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/textView11"
+        app:layout_constraintVertical_bias="0.818" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/mondayAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="120dp"
+        android:background="@drawable/button"
+        android:drawableLeft="@drawable/add_icon"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/ADD"
+        app:layout_constraintBottom_toBottomOf="@+id/textView7"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="@+id/textView7"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/row_meal_cardView"
+        android:layout_width="241dp"
+        android:layout_height="207dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="28dp"
+        android:elevation="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:layout_constraintVertical_bias="0.032">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:id="@+id/home_card_imageview"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/mealinfo" />
+
+            <TextView
+                android:id="@+id/home_meal_name_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/Name"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.187"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_card_imageview" />
+
+            <TextView
+                android:id="@+id/home_countryNameOfMeal_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/Country_Name"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/home_meal_name_textview"
+                app:layout_constraintTop_toBottomOf="@id/home_meal_name_textview" />
+
+            <ImageView
+                android:id="@+id/home_card_fav_imageview"
+                android:layout_width="37dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="28dp"
+                android:background="#57FFFFFF"
+                android:backgroundTint="#2AFFFFFF"
+                app:layout_constraintEnd_toEndOf="@id/home_card_imageview"
+                app:layout_constraintTop_toBottomOf="@+id/home_card_imageview"
+                app:srcCompat="@drawable/favorite_outline_icon" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="26dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/fork_knife_icon"
+                app:layout_constraintEnd_toStartOf="@+id/home_meal_name_textview"
+                app:layout_constraintHorizontal_bias="0.516"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/home_meal_name_textview" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="26dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/flag_icon"
+                app:layout_constraintEnd_toStartOf="@+id/home_countryNameOfMeal_textView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/imageView6"
+                app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/Monday"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row_meal_cardView" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:text="@string/Tuesday"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:text="@string/Wednesday"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"  android:textColor="@color/black"
+        android:textSize="15dp"
+        android:text="@string/Thursday"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:text="@string/Friday"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:text="@string/Saturday"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:text="@string/Sunday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+    <TextView
+        android:id="@+id/thisWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/This_Week"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/tuesdayAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="116dp"
+        android:background="@drawable/button"
+        android:drawableLeft="@drawable/add_icon"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/ADD"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/textView10"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/thisWeek"
+        app:layout_constraintEnd_toStartOf="@+id/thisWeek"
+        app:layout_constraintHorizontal_bias="0.885"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/thisWeek"
+        app:srcCompat="@drawable/previous_arrow_icon" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/thisWeek"
+        app:layout_constraintStart_toEndOf="@+id/thisWeek"
+        app:layout_constraintTop_toTopOf="@+id/thisWeek"
+        app:layout_constraintVertical_bias="0.411"
+        app:srcCompat="@drawable/next_arrow_icon" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

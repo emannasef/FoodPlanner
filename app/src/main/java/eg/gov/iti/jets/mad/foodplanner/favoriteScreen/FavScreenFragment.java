@@ -17,8 +17,6 @@ import java.util.ArrayList;
 
 import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.MealInfoActivity;
 import eg.gov.iti.jets.mad.foodplanner.R;
-import eg.gov.iti.jets.mad.foodplanner.searchScreen.IngredientImagesAdapter;
-import eg.gov.iti.jets.mad.foodplanner.searchScreen.IngredientImg;
 
 public class FavScreenFragment extends Fragment {
 

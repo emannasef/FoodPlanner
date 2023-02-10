@@ -21,4 +21,14 @@ public interface Api_Service {
     Single<Root> getMealInfoByName(@Query("s") String name);
     @GET("random.php")
     Single<Root> getRandomMeal();
+
+    @GET("filter.php?a=")
+    Single<Root> getMealsByCountry(@Query("a") String countryName);
+
+    @GET("list.php?i=list")
+    Single<Root> getIngredient();
+
+    @GET("filter.php?i=")
+    Single<Root> getMealsByIngredient(@Query("i") String countryName);
+
 }
