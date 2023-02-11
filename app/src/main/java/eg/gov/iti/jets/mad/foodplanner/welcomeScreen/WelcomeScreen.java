@@ -1,6 +1,9 @@
 package eg.gov.iti.jets.mad.foodplanner.welcomeScreen;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -91,9 +94,8 @@ TextView alreadyHaveAnAccountTextView;
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =new Intent(WelcomeScreen.this, MainActivity.class);
-                startActivity(i);
-                sharedPref.write("guest");
+                dialogue();
+
             }
         });
 
@@ -138,5 +140,24 @@ TextView alreadyHaveAnAccountTextView;
                 e.printStackTrace();
             }
         }
+    }
+    void dialogue(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Login as Guest?");
+        builder.setMessage("You Will Have Some Capabilities as Guest");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+                Intent i =new Intent(WelcomeScreen.this, MainActivity.class);
+                startActivity(i);
+                sharedPref.write("guest");
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        builder.create().show();
     }
 }
