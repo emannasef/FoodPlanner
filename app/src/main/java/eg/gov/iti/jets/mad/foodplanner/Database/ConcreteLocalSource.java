@@ -15,11 +15,13 @@ public class ConcreteLocalSource implements LocalSource {
     private MealDAO dao;
     private static ConcreteLocalSource concerteLocalSource =null;
     private LiveData<List<Meal>> storedMeals;
+    private LiveData<List<Meal>> storedFavMeals;
 
     private ConcreteLocalSource(Context context){
         AppDatabase db = AppDatabase.getInstance(context.getApplicationContext());
         dao=db.mealDAO();
         storedMeals=dao.getAllMeals();
+
     }
     public static ConcreteLocalSource getInstance(Context context){
         if(concerteLocalSource==null){
@@ -50,5 +52,10 @@ public class ConcreteLocalSource implements LocalSource {
     @Override
     public LiveData<List<Meal>> getAllStoredMeals() {
         return storedMeals;
+    }
+
+    @Override
+    public LiveData<List<Meal>> getAllStoredFavMeals(String email) {
+        return dao.getAllFavMeals(email);
     }
 }

@@ -13,4 +13,5 @@ public interface LocalSource {
     void insertMeal(Meal meal);
     void deleteMeal(Meal meal);
     LiveData<List<Meal>> getAllStoredMeals();
+    LiveData<List<Meal>> getAllStoredFavMeals(String email);
 }

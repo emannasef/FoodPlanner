@@ -23,7 +23,7 @@
             android:name=".ResultSearchScreen.view.ResultSearchActivity"
             android:exported="false" />
         <activity
-            android:name=".MealInfoScreen.MealInfoActivity"
+            android:name=".MealInfoScreen.view.MealInfoActivity"
             android:exported="false" />
         <activity
             android:name=".loginScreen.view.LoginScreenActivity"

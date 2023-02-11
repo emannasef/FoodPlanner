@@ -1,4 +1,4 @@
-package eg.gov.iti.jets.mad.foodplanner.MealInfoScreen;
+package eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,9 +10,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -20,16 +23,22 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import java.util.ArrayList;
 import java.util.List;
 
+import eg.gov.iti.jets.mad.foodplanner.Database.ConcreteLocalSource;
+import eg.gov.iti.jets.mad.foodplanner.Database.Repository;
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
+import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.presenter.MealInfoPresenter;
+import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.presenter.MealInfoPresenterInterface;
 import eg.gov.iti.jets.mad.foodplanner.Model.Category;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
+import eg.gov.iti.jets.mad.foodplanner.Model.RepositoryInterface;
 import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
 import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
 import eg.gov.iti.jets.mad.foodplanner.R;
 
 
-public class MealInfoActivity extends AppCompatActivity implements Network_Delegate {
+public class MealInfoActivity extends AppCompatActivity implements MealInfoViewInterface,OnClickListenerInterface {
 
+    MealInfoPresenterInterface mealInfoPresenterInterface;
     RecyclerView recyclerView;
     IngredientAdapter ingredientAdapter;
     YouTubePlayerView youTubePlayerView ;
@@ -38,16 +47,27 @@ public class MealInfoActivity extends AppCompatActivity implements Network_Deleg
     TextView steps;
     ImageView backImage;
     ImageView mealImage;
+    ImageView heartImageView;
     Api_Client api_client;
     List ingredientArrayList;
     List measureArrayList;
     Intent intent;
+    Meal meal;
     int i;
+    FirebaseAuth auth;
+    FirebaseUser user;
+    RepositoryInterface repositoryInterface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_info);
 
+        auth=FirebaseAuth.getInstance();
+        user= auth.getCurrentUser();
+
+        mealInfoPresenterInterface=new MealInfoPresenter(this, Repository.getInstance(Api_Client.getInstance(), ConcreteLocalSource.getInstance(this),this));
+
+        heartImageView=findViewById(R.id.MealInfoHeartImageView);
         mealName=findViewById(R.id.mealNameTextView);
         countryName=findViewById(R.id.countryNameTextView);
         steps=findViewById(R.id.stepsTextView);
@@ -55,9 +75,7 @@ public class MealInfoActivity extends AppCompatActivity implements Network_Deleg
         mealImage=findViewById(R.id.mealImageView);
 
         intent=getIntent();
-        api_client = Api_Client.getInstance();
-        api_client.mealInfoCall(this,intent.getStringExtra("mealName"));
-
+        mealInfoPresenterInterface.getMeals(intent.getStringExtra("mealName"));
 
 
         recyclerView = findViewById(R.id.ingredientRecycleView);
@@ -73,23 +91,48 @@ public class MealInfoActivity extends AppCompatActivity implements Network_Deleg
                 startActivity(intent);
             }
         });
+        heartImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(meal.isFav==false) {
+                    heartImageView.setImageResource(R.drawable.favorite_filled_black_icon);
+                    Toast.makeText(MealInfoActivity.this, "Added to Favorite", Toast.LENGTH_SHORT).show();
+                    meal.userEmail = user.getEmail();
+                    meal.isFav = true;
+                    addMeal(meal);
+                }
+                else if(meal.isFav==true /*&& meal.userEmail.equals(user.getEmail())*/){
+                    heartImageView.setImageResource(R.drawable.favorite_outline_icon);
+                    Toast.makeText(MealInfoActivity.this, "removed Successfully", Toast.LENGTH_LONG).show();
+                    meal.userEmail = null;
+                    meal.isFav = false;
+                    deleteMeal(meal);
+                }
+            }
+        });
 
         ingredientArrayList = new ArrayList<String>();
         measureArrayList = new ArrayList<String>();
     }
 
     @Override
-    public void onSuccessResult(List<Meal> myMeal) {
+    public void showData(List<Meal> myMeal) {
 
+        meal=myMeal.get(0);
         Glide.with(this).load(myMeal.get(0).strMealThumb)
-        .apply(new RequestOptions()
-        .override(150, 150)
-        .placeholder(R.drawable.mealinfo))
-        .into(mealImage);
+                .apply(new RequestOptions()
+                        .override(150, 150)
+                        .placeholder(R.drawable.mealinfo))
+                .into(mealImage);
 
         mealName.setText(myMeal.get(0).strMeal);
         countryName.setText(myMeal.get(0).strArea);
         steps.setText(myMeal.get(0).strInstructions);
+        Toast.makeText(this, "fav "+meal.isFav+" name "+meal.strMeal, Toast.LENGTH_SHORT).show();
+        if(meal.isFav==true /*&& meal.userEmail.equals(user.getEmail())*/) {
+            heartImageView.setImageResource(R.drawable.favorite_filled_black_icon);
+        }
 
         if(myMeal.get(0).strIngredient1!=null&&!myMeal.get(0).strIngredient1.isEmpty()&&!myMeal.get(0).strIngredient1.equals(" ")){
             ingredientArrayList.add(myMeal.get(0).strIngredient1);
@@ -226,16 +269,20 @@ public class MealInfoActivity extends AppCompatActivity implements Network_Deleg
                 youTubePlayer.cueVideo(arr[1],0);
             }
         });
-        }
-
-    @Override
-    public void onSuccessCategoryResult(List<Category> categories) {
-
     }
 
     @Override
-    public void onFailureResult(String errorMessage) {
-
+    public void addMeal(Meal meal) {
+        mealInfoPresenterInterface.addToFav(meal);
     }
 
+    @Override
+    public void deleteMeal(Meal meal) {
+        mealInfoPresenterInterface.deleteFromFav(meal);
+    }
+
+    @Override
+    public void onheartClick(Meal result) {
+        addMeal(result);
+    }
 }

@@ -23,6 +23,11 @@ public class FavPresenter implements FavPresenterInterface {
     }
 
     @Override
+    public LiveData<List<Meal>> getFavMeals(String email) {
+        return repositoryInterface.getAllStoredFavMeals(email);
+    }
+
+    @Override
     public void deleteFromFav(Meal meal) {
         repositoryInterface.deleteMeal(meal);
     }

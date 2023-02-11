@@ -88,4 +88,9 @@ public class Repository implements RepositoryInterface {
     public LiveData<List<Meal>> getAllStoredMeals() {
         return localSource.getAllStoredMeals();
     }
+
+    @Override
+    public LiveData<List<Meal>> getAllStoredFavMeals(String email) {
+        return localSource.getAllStoredFavMeals(email);
+    }
 }

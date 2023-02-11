@@ -15,12 +15,10 @@ import java.util.List;
 import eg.gov.iti.jets.mad.foodplanner.Database.ConcreteLocalSource;
 import eg.gov.iti.jets.mad.foodplanner.Database.Repository;
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
-import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.MealInfoActivity;
-import eg.gov.iti.jets.mad.foodplanner.Model.Category;
+import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.view.MealInfoActivity;
 
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
-import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
 import eg.gov.iti.jets.mad.foodplanner.R;
 import eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.presenter.ResultSearchPresenter;
 import eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.presenter.ResultSearchPresenterInterface;
@@ -100,6 +98,11 @@ public class ResultSearchActivity extends AppCompatActivity implements  ResultMe
     }
 
     @Override
+    public void deleteMeal(Meal meal) {
+        resultSearchPresenterInterface.deleteFromFav(meal);
+    }
+
+    @Override
     public void onImageClick(String name) {
         Intent intent = new Intent(ResultSearchActivity.this, MealInfoActivity.class);
         intent.putExtra("mealName",name);
@@ -107,7 +110,11 @@ public class ResultSearchActivity extends AppCompatActivity implements  ResultMe
     }
 
     @Override
-    public void onheartClick(Meal result) {
-        addMeal(result);
+    public void onheartClick(Meal result, String method) {
+        if(method.equals("add")) {
+            addMeal(result);
+        }else if(method.equals("remove")){
+            deleteMeal(result);
+        }
     }
 }

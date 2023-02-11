@@ -159,10 +159,10 @@ public class Meal {
     public String strMeasure20;
 
     @ColumnInfo(name = "MealUserEmail")
-    public String userEmail;
+    public String userEmail=" ";
 
     @ColumnInfo(name = "MealIsFav")
-    public boolean isFav;
+    public boolean isFav=false;
 
 }
 
