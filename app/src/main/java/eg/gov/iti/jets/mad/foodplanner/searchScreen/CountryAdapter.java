@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.R;
@@ -22,10 +23,10 @@ import eg.gov.iti.jets.mad.foodplanner.R;
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
 
     private final Context context;
-    private ArrayList<Meal> countries;
+    private List<Meal> countries;
     private CountryClickListener countryClickListener;
 
-    public CountryAdapter(Context context, ArrayList<Meal> countries, CountryClickListener countryClickListener) {
+    public CountryAdapter(Context context, List<Meal> countries, CountryClickListener countryClickListener) {
         this.context = context;
         this.countries = countries;
         this.countryClickListener = countryClickListener;

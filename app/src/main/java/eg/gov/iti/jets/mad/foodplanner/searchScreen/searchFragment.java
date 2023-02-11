@@ -19,12 +19,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import eg.gov.iti.jets.mad.foodplanner.Model.Category;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
 import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
 import eg.gov.iti.jets.mad.foodplanner.R;
-import eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.ResultSearchActivity;
+import eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.view.ResultSearchActivity;
 
 public class searchFragment extends Fragment implements Network_Delegate, CountryClickListener, IngredientClickListener ,CategoryClickListener {
 
@@ -37,8 +39,8 @@ public class searchFragment extends Fragment implements Network_Delegate, Countr
     IngredientImagesAdapter ingredientAdapter;
     EditText search_editText;
     Api_Client api_client;
-    ArrayList<Meal> countries = new ArrayList();
-    ArrayList<Meal> ingredients = new ArrayList();
+    List<Meal> countries = new ArrayList();
+    List<Meal> ingredients = new ArrayList();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,7 +104,7 @@ public class searchFragment extends Fragment implements Network_Delegate, Countr
     }
 
     @Override
-    public void onSuccessResult(ArrayList<Meal> myMeal) {
+    public void onSuccessResult(List<Meal> myMeal) {
         for (Meal ingredient : myMeal) {
             //   System.out.println("################"+ingredient.strIngredient);
             if (ingredient.strIngredient != null) {
@@ -120,7 +122,7 @@ public class searchFragment extends Fragment implements Network_Delegate, Countr
         }
     }
     @Override
-    public void onSuccessCategoryResult(ArrayList<Category> categories) {
+    public void onSuccessCategoryResult(List<Category> categories) {
         categoryAdapter = new categoryAdapter(getContext(), categories,this);
         category_recyclerView.setAdapter(categoryAdapter);
     }

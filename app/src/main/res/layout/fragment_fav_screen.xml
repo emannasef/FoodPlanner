@@ -5,7 +5,7 @@
     android:id="@+id/favouriteFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".favoriteScreen.FavScreenFragment">
+    tools:context=".favoriteScreen.view.FavScreenFragment">
 
     <TextView
         android:id="@+id/textView4"

@@ -25,11 +25,11 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHo
 
     private final Context context;
 
-    private ArrayList<Category> categoryArrayList;
+    private List<Category> categoryArrayList;
 
     CategoryClickListener categoryClickListener;
 
-    public categoryAdapter(Context context, ArrayList<Category> categoryArrayList,CategoryClickListener categoryClickListener) {
+    public categoryAdapter(Context context, List<Category> categoryArrayList,CategoryClickListener categoryClickListener) {
         this.context = context;
         this.categoryArrayList = categoryArrayList;
         this.categoryClickListener=categoryClickListener;
