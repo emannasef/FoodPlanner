@@ -53,9 +53,10 @@
 
             <TextView
                 android:id="@+id/mealNameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="241dp"
+                android:layout_height="38dp"
                 android:layout_marginStart="10dp"
+                android:inputType="textMultiLine"
                 android:text="@string/Name"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintTop_toTopOf="@+id/imageView4" />

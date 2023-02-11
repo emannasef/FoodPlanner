@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".signupScreen.SignupScreen"
+            android:name=".signupScreen.view.SignupScreen"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

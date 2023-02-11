@@ -19,23 +19,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
+import eg.gov.iti.jets.mad.foodplanner.Model.Category;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
 import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
 import eg.gov.iti.jets.mad.foodplanner.R;
 import eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.ResultSearchActivity;
 
-public class searchFragment extends Fragment implements Network_Delegate, CountryClickListener, IngredientClickListener {
+public class searchFragment extends Fragment implements Network_Delegate, CountryClickListener, IngredientClickListener ,CategoryClickListener {
 
-    RecyclerView recyclerView;
+    RecyclerView ingredient_recyclerView;
     RecyclerView category_recyclerView;
-    categoryAdapter categoryAdapter;
     RecyclerView country_recyclerView;
+    categoryAdapter categoryAdapter;
     CountryAdapter countryAdapter;
     IngredientImagesAdapter ingredientAdapter;
     EditText search_editText;
-
     Api_Client api_client;
     ArrayList<Meal> countries = new ArrayList();
     ArrayList<Meal> ingredients = new ArrayList();
@@ -45,7 +44,6 @@ public class searchFragment extends Fragment implements Network_Delegate, Countr
         super.onCreate(savedInstanceState);
 
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,16 +54,17 @@ public class searchFragment extends Fragment implements Network_Delegate, Countr
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        api_client = Api_Client.getInstance();
 
+        api_client=Api_Client.getInstance();
+        api_client.categoryCall(this);
         api_client.getAreaCall(this);
         api_client.getIngredientCall(this);
 
-        recyclerView = view.findViewById(R.id.ingredient_recycleView);
-        recyclerView.setHasFixedSize(true);
+        ingredient_recyclerView = view.findViewById(R.id.ingredient_recycleView);
+        ingredient_recyclerView.setHasFixedSize(true);
         LinearLayoutManager ingredientLayoutManager = new LinearLayoutManager(getContext());
         ingredientLayoutManager.setOrientation(ingredientLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(ingredientLayoutManager);
+        ingredient_recyclerView.setLayoutManager(ingredientLayoutManager);
 
         category_recyclerView = view.findViewById(R.id.category_recycleView);
         category_recyclerView.setHasFixedSize(true);
@@ -80,37 +79,8 @@ public class searchFragment extends Fragment implements Network_Delegate, Countr
         country_recyclerView.setLayoutManager(layoutManager_country);
 
 
-        ArrayList categories = new ArrayList<category>();
-        category categories1 = new category(R.drawable.welcome_original_img);
-        category categories2 = new category(R.drawable.welcome_original_img);
-        category categories3 = new category(R.drawable.welcome_original_img);
-        category categories4 = new category(R.drawable.welcome_original_img);
-        category categories5 = new category(R.drawable.welcome_original_img);
-        category categories6 = new category(R.drawable.welcome_original_img);
-        category categories7 = new category(R.drawable.welcome_original_img);
-        category categories8 = new category(R.drawable.welcome_original_img);
-        category categories9 = new category(R.drawable.welcome_original_img);
-
-        categories.add(categories1);
-        categories.add(categories2);
-        categories.add(categories3);
-        categories.add(categories4);
-        categories.add(categories5);
-        categories.add(categories6);
-        categories.add(categories7);
-        categories.add(categories8);
-        categories.add(categories9);
-        categoryAdapter = new categoryAdapter(getContext(), categories, new categoryAdapter.categoryClickListener() {
-            @Override
-            public void onCategoryClick(category obj) {
-                Intent i = new Intent(getContext(), ResultSearchActivity.class);
-                startActivity(i);
-            }
-        });
-        category_recyclerView.setAdapter(categoryAdapter);
-
         ingredientAdapter = new IngredientImagesAdapter(getContext(), ingredients, this);
-        recyclerView.setAdapter(ingredientAdapter);
+        ingredient_recyclerView.setAdapter(ingredientAdapter);
 
         countryAdapter = new CountryAdapter(getContext(), countries, this);
         country_recyclerView.setAdapter(countryAdapter);
@@ -119,14 +89,15 @@ public class searchFragment extends Fragment implements Network_Delegate, Countr
         search_editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    Intent i = new Intent(getContext(), ResultSearchActivity.class);
+                if(actionId== EditorInfo.IME_ACTION_SEARCH){
+                    Intent i =new Intent(getContext(), ResultSearchActivity.class);
+                    i.putExtra("searchType","name");
+                    i.putExtra("searchName",search_editText.getText().toString());
                     startActivity(i);
                 }
                 return false;
             }
         });
-
     }
 
     @Override
@@ -143,20 +114,28 @@ public class searchFragment extends Fragment implements Network_Delegate, Countr
             countries.add(country);
             if (countries.size()<=27){
             countryAdapter.notifyDataSetChanged();}
+            // System.out.println(country);
+
+            if (countries.size()<=26){
+                countries.add(country);
+                countryAdapter.notifyDataSetChanged();
+            }
         }
-
     }
-
+    @Override
+    public void onSuccessCategoryResult(ArrayList<Category> categories) {
+        categoryAdapter = new categoryAdapter(getContext(), categories,this);
+        category_recyclerView.setAdapter(categoryAdapter);
+    }
     @Override
     public void onFailureResult(String errorMessage) {
 
     }
-
     @Override
     public void onCountryClick(Meal country) {
         Intent intent = new Intent(getContext(), ResultSearchActivity.class);
         intent.putExtra("countryName", country.strArea);
-        intent.putExtra("searchType","countryName");
+        intent.putExtra("searchType","country");
         // System.out.println("##############"+country.strArea);
         startActivity(intent);
     }
@@ -167,7 +146,15 @@ public class searchFragment extends Fragment implements Network_Delegate, Countr
         Toast.makeText(getContext(), ingredient.strIngredient, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getContext(), ResultSearchActivity.class);
         intent.putExtra("ingredientName", ingredient.strIngredient);
-        intent.putExtra("searchType","ingredientName");
+        intent.putExtra("searchType","ingredient");
         startActivity(intent);
+    }
+
+    @Override
+    public void onCategoryClick(Category obj) {
+        Intent i = new Intent(getContext(),ResultSearchActivity.class);
+        i.putExtra("searchType","category");
+        i.putExtra("searchCategory",obj.strCategory);
+        startActivity(i);
     }
 }

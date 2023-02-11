@@ -1,8 +1,6 @@
 package eg.gov.iti.jets.mad.foodplanner.welcomeScreen;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,7 +31,7 @@ import eg.gov.iti.jets.mad.foodplanner.Model.User;
 import eg.gov.iti.jets.mad.foodplanner.R;
 import eg.gov.iti.jets.mad.foodplanner.loginScreen.SharedPref;
 import eg.gov.iti.jets.mad.foodplanner.loginScreen.view.LoginScreenActivity;
-import eg.gov.iti.jets.mad.foodplanner.signupScreen.SignupScreen;
+import eg.gov.iti.jets.mad.foodplanner.signupScreen.view.SignupScreen;
 
 
 public class WelcomeScreen extends AppCompatActivity {

@@ -14,6 +14,8 @@ import java.util.ArrayList;
 
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.MealInfoActivity;
+import eg.gov.iti.jets.mad.foodplanner.Model.Category;
+
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
 import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
@@ -26,9 +28,8 @@ public class ResultSearchActivity extends AppCompatActivity implements Network_D
     ImageButton backResult_btn;
     RecyclerView recyclerView;
     ResultAdapter resultAdapter;
-    Intent intent;
     Api_Client api_client;
-
+    Intent intent;
     ArrayList<Meal> countryMealsResult = new ArrayList();
     ArrayList<Meal> ingredientMealsResult = new ArrayList();
 
@@ -36,17 +37,21 @@ public class ResultSearchActivity extends AppCompatActivity implements Network_D
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_search);
-        intent = getIntent();
-        api_client = Api_Client.getInstance();
+        api_client=Api_Client.getInstance();
 
-        if(intent.getStringExtra("searchType").equals("countryName")) {
+        intent=getIntent();
+        if(intent.getStringExtra("searchType").equals("category")) {
+             api_client.searchBycategoryCall(this,intent.getStringExtra("searchCategory"));
+        }
+        else if(intent.getStringExtra("searchType").equals("name")) {
+            api_client.mealInfoCall(this, intent.getStringExtra("searchName"));
+        }
+        else if(intent.getStringExtra("searchType").equals("country")) {
             api_client.getMealsByCountryCall(this, intent.getStringExtra("countryName"));
-        }else if (intent.getStringExtra("searchType").equals("ingredientName")){
+        }else if (intent.getStringExtra("searchType").equals("ingredient")){
             api_client.getMealsByIngredientCall(this, intent.getStringExtra("ingredientName"));
         }
-
-
-        backResult_btn = findViewById(R.id.backResult_btn);
+        backResult_btn=findViewById(R.id.backResult_btn);
         recyclerView = findViewById(R.id.resultRecyclerView);
         recyclerView.setHasFixedSize(true);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
@@ -59,7 +64,6 @@ public class ResultSearchActivity extends AppCompatActivity implements Network_D
                 startActivity(i);
             }
         });
-
         resultAdapter = new ResultAdapter(this, countryMealsResult,this );
         resultAdapter = new ResultAdapter(this, ingredientMealsResult,this );
         recyclerView.setAdapter(resultAdapter);
@@ -67,7 +71,8 @@ public class ResultSearchActivity extends AppCompatActivity implements Network_D
 
     @Override
     public void onSuccessResult(ArrayList<Meal> myMeal) {
-
+        resultAdapter = new ResultAdapter(this, myMeal, this);
+        recyclerView.setAdapter(resultAdapter);
         for (Meal name : myMeal) {
             System.out.println("##################" + name);
             countryMealsResult.add(name);
@@ -79,14 +84,13 @@ public class ResultSearchActivity extends AppCompatActivity implements Network_D
             ingredientMealsResult.add(ingredientName);
             resultAdapter.notifyDataSetChanged();
         }
-
     }
-
+    @Override
+    public void onSuccessCategoryResult(ArrayList<Category> categories) {
+    }
     @Override
     public void onFailureResult(String errorMessage) {
-
     }
-
     @Override
     public void onResultMealClick(Meal result) {
         Intent intent = new Intent(ResultSearchActivity.this, MealInfoActivity.class);

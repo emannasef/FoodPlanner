@@ -26,6 +26,7 @@ public class Api_Client {
             client = new Api_Client();
         return client;
     }
+
     public void mealInfoCall(Network_Delegate network ,String name) {
         Gson gson = new GsonBuilder().create();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(base_Url)
@@ -52,6 +53,40 @@ public class Api_Client {
         Single<Root> Meals = api_service.getRandomMeal();
 
         Meals.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item -> {
+                            network.onSuccessResult(item.getMeals());
+                        },
+                        e -> e.printStackTrace()
+                );
+    }
+
+    public void categoryCall(Network_Delegate network) {
+        Gson gson = new GsonBuilder().create();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(base_Url)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create()).build();
+        api_service = retrofit.create(Api_Service.class);
+        Single<Root> category = api_service.getCategory();
+
+        category.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item -> {
+                            network.onSuccessCategoryResult(item.getCategories());
+                        },
+                        e -> e.printStackTrace()
+                );
+    }
+
+    public void searchBycategoryCall(Network_Delegate network,String categoryName) {
+        Gson gson = new GsonBuilder().create();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(base_Url)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create()).build();
+        api_service = retrofit.create(Api_Service.class);
+        Single<Root> category = api_service.getMealByCategory(categoryName);
+
+        category.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         item -> {
                             network.onSuccessResult(item.getMeals());
@@ -129,5 +164,4 @@ public class Api_Client {
                         e -> e.printStackTrace()
                 );
     }
-
 }

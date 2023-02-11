@@ -13,7 +13,8 @@ public interface Api_Service {
 
     @GET("categories.php")
     Single<Root> getCategory();
-
+    @GET("filter.php?c=")
+    Single<Root> getMealByCategory(@Query("c")String categoryName);
     @GET("list.php?a=list")
     Single<Root> getArea();
     @GET("search.php?s=")
