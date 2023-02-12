@@ -41,7 +41,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(ingredientArrayList.get(position));
         holder.quantity.setText(measureArrayList.get(position));
-        Glide.with(context).load("https://www.themealdb.com/images/ingredients/"+ingredientArrayList.get(position)+ "-Small.png").apply(new RequestOptions().override(150, 150).placeholder(R.drawable.mealinfo)).into(holder.imageView);
+        Glide.with(context).load("https://www.themealdb.com/images/ingredients/"+ingredientArrayList.get(position)+ "-Small.png").apply(new RequestOptions().override(150, 150).placeholder(R.drawable.ic_launcher_background)).into(holder.imageView);
 
     }
 
