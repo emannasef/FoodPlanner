@@ -29,8 +29,7 @@ Android Applicication help users that interested in cooking.
 
 
 
-#Technology used in our project:
-
+# Technology used in our project:
 
 
 - Java Language
@@ -48,13 +47,9 @@ Android Applicication help users that interested in cooking.
 - Material design
 
 
-Here are our UI
 
 
-
-
-
-
+# Here are our UI
 
 
 1-SplashScreen
