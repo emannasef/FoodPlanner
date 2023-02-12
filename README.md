@@ -3,6 +3,8 @@
 Android Applicication help users that interested in cooking.
 
 
+
+
 Main features:
 - Random meals
 
@@ -15,6 +17,8 @@ Main features:
 - Authentication by email, google and guest
 
 - Backup for saved meals and weekly meals planned
+
+
 
 
 
