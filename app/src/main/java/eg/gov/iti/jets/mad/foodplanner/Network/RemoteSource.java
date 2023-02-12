@@ -9,4 +9,6 @@ public interface RemoteSource {
     public void getMealsByCountryCall(Network_Delegate network ,String countryName);
     public void getIngredientCall(Network_Delegate network);
     public void getMealsByIngredientCall(Network_Delegate network ,String ingredientName);
+    void pushToFireStore(String mealName,String mealImage, String mealCountryName);
+
 }

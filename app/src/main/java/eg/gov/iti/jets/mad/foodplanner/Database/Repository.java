@@ -105,6 +105,12 @@ public class Repository implements RepositoryInterface {
     public void deleteMeal_MealPlan(MealPlan mealPlan) {
         localSource.deleteMeal_MealPlan(mealPlan);
     }
+
+    @Override
+    public void pushToFireStore(String mealName, String mealImage, String mealCountryName) {
+        remoteSource.pushToFireStore(mealName,mealImage,mealCountryName);
+    }
+
     public LiveData<List<Meal>> getAllStoredFavMeals(String email) {
         return localSource.getAllStoredFavMeals(email);
     }

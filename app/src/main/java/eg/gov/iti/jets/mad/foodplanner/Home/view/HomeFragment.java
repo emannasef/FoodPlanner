@@ -18,6 +18,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +31,8 @@ import eg.gov.iti.jets.mad.foodplanner.Database.ConcreteLocalSource;
 import eg.gov.iti.jets.mad.foodplanner.Database.Repository;
 import eg.gov.iti.jets.mad.foodplanner.Home.presenter.HomePresenter;
 import eg.gov.iti.jets.mad.foodplanner.Home.presenter.HomePresenterInterface;
-import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.view.MealInfoActivity;
+import eg.gov.iti.jets.mad.foodplanner.Model.FireMeal;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
 import eg.gov.iti.jets.mad.foodplanner.R;
@@ -44,6 +49,7 @@ public class HomeFragment extends Fragment implements HomeViewInterface,OnItemCl
     Meal meal;
     FirebaseAuth auth;
     FirebaseUser user;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -78,6 +84,7 @@ public class HomeFragment extends Fragment implements HomeViewInterface,OnItemCl
                     meal.userEmail = user.getEmail();
                     meal.isFav = true;
                     addMeal(meal);
+                    homePresenterInterface.addDataToFirebase(meal.strMeal,meal.strMealThumb,meal.strArea);
                 }
                 else if(meal.isFav==true /*&& meal.userEmail.equals(user.getEmail())*/){
                     heart_ImageView.setImageResource(R.drawable.favorite_outline_icon);
@@ -127,4 +134,5 @@ public class HomeFragment extends Fragment implements HomeViewInterface,OnItemCl
     public void onItemClick(Meal meal) {
         addMeal(meal);
     }
+
 }

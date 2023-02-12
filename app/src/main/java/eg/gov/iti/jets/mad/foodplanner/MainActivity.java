@@ -18,7 +18,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import eg.gov.iti.jets.mad.foodplanner.Home.view.HomeFragment;
 import eg.gov.iti.jets.mad.foodplanner.MealPlan.view.MealPlanFragment;
-import eg.gov.iti.jets.mad.foodplanner.Profile.ProfileFragment;
+import eg.gov.iti.jets.mad.foodplanner.Profile.view.ProfileFragment;
 import eg.gov.iti.jets.mad.foodplanner.favoriteScreen.view.FavScreenFragment;
 import eg.gov.iti.jets.mad.foodplanner.loginScreen.SharedPref;
 import eg.gov.iti.jets.mad.foodplanner.searchScreen.view.searchFragment;
