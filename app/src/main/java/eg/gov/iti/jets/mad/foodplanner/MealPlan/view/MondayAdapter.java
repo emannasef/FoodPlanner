@@ -64,6 +64,12 @@ public class MondayAdapter extends RecyclerView.Adapter<MondayAdapter.ViewHolder
                 onDayClickListener.onDayDeleteClick(mealPlan);
             }
         });
+        holder.mealImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDayClickListener.onImageClick(holder.mealNameTextView.getText().toString());
+            }
+        });
 
     }
 

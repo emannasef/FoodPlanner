@@ -46,6 +46,7 @@ TextView alreadyHaveAnAccountTextView;
     ImageButton googleBtn;
     private GoogleSignInClient client;
     FirebaseAuth auth;
+    FirebaseUser user;
     FirebaseDatabase database;
 
     @Override
@@ -61,6 +62,7 @@ TextView alreadyHaveAnAccountTextView;
         database=FirebaseDatabase.getInstance("https://foodplanner-78891-default-rtdb.firebaseio.com/");
 
         auth=FirebaseAuth.getInstance();
+
         GoogleSignInOptions options=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -123,6 +125,7 @@ TextView alreadyHaveAnAccountTextView;
                             assert user1 != null;
                             user1.setEmail(user.getEmail());
                             user1.setName(user.getDisplayName());
+                            sharedPref.write(user.getEmail());
                             database.getReference().child("User").child(user.getDisplayName()).setValue(user1);
                             Intent i =new Intent(WelcomeScreen.this,MainActivity.class);
                             startActivity(i);

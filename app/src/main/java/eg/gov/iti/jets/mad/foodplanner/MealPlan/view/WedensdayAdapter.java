@@ -63,6 +63,12 @@ public class WedensdayAdapter extends RecyclerView.Adapter<WedensdayAdapter.View
                 onDayClickListener.onDayDeleteClick(mealPlan);
             }
         });
+        holder.mealImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDayClickListener.onImageClick(holder.mealNameTextView.getText().toString());
+            }
+        });
     }
 
     @Override

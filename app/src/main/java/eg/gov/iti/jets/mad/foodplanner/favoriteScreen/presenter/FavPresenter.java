@@ -15,10 +15,10 @@ public class FavPresenter implements FavPresenterInterface {
         this.favViewInterface=viewInterface;
         this.repositoryInterface=repositoryInterface;
     }
-    @Override
+   /* @Override
     public LiveData<List<Meal>> getMeals() {
         return repositoryInterface.getAllStoredMeals();
-    }
+    }*/
 
     @Override
     public LiveData<List<Meal>> getFavMeals(String email) {

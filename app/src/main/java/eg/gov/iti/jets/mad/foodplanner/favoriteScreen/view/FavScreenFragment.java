@@ -24,6 +24,7 @@ import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
 import eg.gov.iti.jets.mad.foodplanner.R;
 import eg.gov.iti.jets.mad.foodplanner.favoriteScreen.presenter.FavPresenter;
 import eg.gov.iti.jets.mad.foodplanner.favoriteScreen.presenter.FavPresenterInterface;
+import eg.gov.iti.jets.mad.foodplanner.loginScreen.SharedPref;
 
 public class FavScreenFragment extends Fragment implements OnFavoriteClickListener,FavViewInterface {
 
@@ -31,6 +32,7 @@ public class FavScreenFragment extends Fragment implements OnFavoriteClickListen
     favMealAdapter favMealAdapter;
     FavPresenterInterface favPresenterInterface;
     Intent intent;
+    SharedPref sharedPref;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,7 @@ public class FavScreenFragment extends Fragment implements OnFavoriteClickListen
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        sharedPref=new SharedPref(getContext());
         recyclerView = view.findViewById(R.id.favRecyclerView);
         recyclerView.setHasFixedSize(true);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2);
@@ -56,7 +59,7 @@ public class FavScreenFragment extends Fragment implements OnFavoriteClickListen
 
         favMealAdapter = new favMealAdapter(getContext(),this);
         favPresenterInterface=new FavPresenter(this, Repository.getInstance(Api_Client.getInstance(), ConcreteLocalSource.getInstance(getContext()),getContext()));
-        showData();
+        showData(sharedPref.read());
     }
 
     @Override
@@ -70,16 +73,16 @@ public class FavScreenFragment extends Fragment implements OnFavoriteClickListen
     }
 
     @Override
-    public void showData() {
-        favPresenterInterface.getMeals().observe(getViewLifecycleOwner(), new Observer<List<Meal>>() {
+    public void showData(String email) {
+       /* favPresenterInterface.getMeals().observe(getViewLifecycleOwner(), new Observer<List<Meal>>() {
             @Override
             public void onChanged(List<Meal> meals) {
 
                 favMealAdapter.setList(meals);
                 recyclerView.setAdapter(favMealAdapter);
             }
-        });
-       /* favPresenterInterface.getFavMeals().observe(getViewLifecycleOwner(), new Observer<List<Meal>>() {
+        });*/
+       favPresenterInterface.getFavMeals(email).observe(getViewLifecycleOwner(), new Observer<List<Meal>>() {
             @Override
             public void onChanged(List<Meal> meals) {
                 if(meals!=null) {
@@ -87,7 +90,7 @@ public class FavScreenFragment extends Fragment implements OnFavoriteClickListen
                     recyclerView.setAdapter(favMealAdapter);
                 }
             }
-        });*/
+        });
     }
     @Override
     public void goToMealInfo(String mealName) {

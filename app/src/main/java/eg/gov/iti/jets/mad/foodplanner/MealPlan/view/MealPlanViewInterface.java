@@ -5,6 +5,7 @@ import eg.gov.iti.jets.mad.foodplanner.Model.MealPlan;
 
 public interface MealPlanViewInterface {
 
-    public void showData();
+    public void goToMealInfo(String mealName);
+    public void showData(String email);
     public void deleteMealFromMealPlan(MealPlan meal);
 }

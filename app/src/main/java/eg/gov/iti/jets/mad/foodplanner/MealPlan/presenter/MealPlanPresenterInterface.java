@@ -9,7 +9,7 @@ import eg.gov.iti.jets.mad.foodplanner.Model.MealPlan;
 
 public interface MealPlanPresenterInterface {
 
-    public LiveData<List<MealPlan>> getMealsInMealPlan();
+    public LiveData<List<MealPlan>> getMealsInMealPlan(String email);
     public void deleteFromMealPlan(MealPlan meal);
 
 

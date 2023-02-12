@@ -9,6 +9,7 @@ import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.Model.MealPlan;
+import eg.gov.iti.jets.mad.foodplanner.loginScreen.SharedPref;
 
 public class ConcreteLocalSource implements LocalSource {
 
@@ -19,14 +20,16 @@ public class ConcreteLocalSource implements LocalSource {
     private LiveData<List<Meal>> storedMeals;
     private LiveData<List<Meal>> storedFavMeals;
 
-    private LiveData<List<MealPlan>> storedMeals_MealPlan;
+   // private LiveData<List<MealPlan>> storedMeals_MealPlan;
+    SharedPref sharedPref;
 
     private ConcreteLocalSource(Context context){
+        sharedPref =new SharedPref(context);
         AppDatabase db = AppDatabase.getInstance(context.getApplicationContext());
         dao=db.mealDAO();
         mealPlanDAO=db.mealPlanDAO();
-        storedMeals=dao.getAllMeals();
-        storedMeals_MealPlan=mealPlanDAO.getAllMeals_MealPlan();
+        //storedMeals=dao.getAllMeals();
+       // storedMeals_MealPlan=mealPlanDAO.getAllMeals_MealPlan(sharedPref.read());
 
     }
     public static ConcreteLocalSource getInstance(Context context){
@@ -56,15 +59,16 @@ public class ConcreteLocalSource implements LocalSource {
             }
         }).start();
     }
-    @Override
+  /*  @Override
     public LiveData<List<Meal>> getAllStoredMeals() {
         return storedMeals;
-    }
+    }*/
 
     @Override
-    public LiveData<List<MealPlan>> getAllStoredMeals_MealPlan() {
-        Log.i(TAG, "getAllStoredMeals_MealPlan:ConcreteLocal"+storedMeals_MealPlan);
-        return storedMeals_MealPlan;
+    public LiveData<List<MealPlan>> getAllStoredMeals_MealPlan(String email) {
+       // Log.i(TAG, "getAllStoredMeals_MealPlan:ConcreteLocal"+storedMeals_MealPlan);
+       // return storedMeals_MealPlan;
+        return  mealPlanDAO.getAllMeals_MealPlan(email);
     }
 
     @Override
