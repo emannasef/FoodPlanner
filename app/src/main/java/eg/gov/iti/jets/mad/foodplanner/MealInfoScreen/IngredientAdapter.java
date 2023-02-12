@@ -15,15 +15,16 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.R;
 
 public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.ViewHolder> {
 
     private final Context context;
-    private ArrayList<String> ingredientArrayList;
-    private ArrayList<String> measureArrayList;
-    public IngredientAdapter(Context context, ArrayList<String> ingredientArrayList,ArrayList<String> measureArrayList) {
+    private List<String> ingredientArrayList;
+    private List<String> measureArrayList;
+    public IngredientAdapter(Context context, List<String> ingredientArrayList,List<String> measureArrayList) {
         this.context = context;
         this.ingredientArrayList = ingredientArrayList;
         this.measureArrayList=measureArrayList;

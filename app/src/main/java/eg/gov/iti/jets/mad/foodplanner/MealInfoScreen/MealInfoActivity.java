@@ -18,6 +18,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.Model.Category;
@@ -38,8 +39,8 @@ public class MealInfoActivity extends AppCompatActivity implements Network_Deleg
     ImageView backImage;
     ImageView mealImage;
     Api_Client api_client;
-    ArrayList ingredientArrayList;
-    ArrayList measureArrayList;
+    List ingredientArrayList;
+    List measureArrayList;
     Intent intent;
     int i;
     @Override
@@ -78,7 +79,7 @@ public class MealInfoActivity extends AppCompatActivity implements Network_Deleg
     }
 
     @Override
-    public void onSuccessResult(ArrayList<Meal> myMeal) {
+    public void onSuccessResult(List<Meal> myMeal) {
 
         Glide.with(this).load(myMeal.get(0).strMealThumb)
         .apply(new RequestOptions()
@@ -228,7 +229,7 @@ public class MealInfoActivity extends AppCompatActivity implements Network_Deleg
         }
 
     @Override
-    public void onSuccessCategoryResult(ArrayList<Category> categories) {
+    public void onSuccessCategoryResult(List<Category> categories) {
 
     }
 

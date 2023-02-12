@@ -20,7 +20,7 @@
         android:theme="@style/Theme.FoodPlanner"
         tools:targetApi="31">
         <activity
-            android:name=".ResultSearchScreen.ResultSearchActivity"
+            android:name=".ResultSearchScreen.view.ResultSearchActivity"
             android:exported="false" />
         <activity
             android:name=".MealInfoScreen.MealInfoActivity"

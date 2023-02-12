@@ -42,7 +42,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/forkImageView"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:layout_marginStart="15dp"
@@ -58,8 +58,8 @@
                 android:layout_marginStart="10dp"
                 android:inputType="textMultiLine"
                 android:text="@string/Name"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
-                app:layout_constraintTop_toTopOf="@+id/imageView4" />
+                app:layout_constraintStart_toEndOf="@+id/forkImageView"
+                app:layout_constraintTop_toTopOf="@+id/forkImageView" />
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -67,8 +67,8 @@
                 android:layout_height="24dp"
                 android:layout_marginTop="16dp"
                 android:src="@drawable/flag_icon"
-                app:layout_constraintStart_toStartOf="@+id/imageView4"
-                app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+                app:layout_constraintStart_toStartOf="@+id/forkImageView"
+                app:layout_constraintTop_toBottomOf="@+id/forkImageView" />
 
 
             <TextView
@@ -98,7 +98,7 @@
                 android:text="@string/Ingredients"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/imageView4"
+                app:layout_constraintStart_toStartOf="@+id/forkImageView"
                 app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
             <androidx.recyclerview.widget.RecyclerView

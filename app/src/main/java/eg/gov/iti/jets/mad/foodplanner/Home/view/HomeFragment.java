@@ -1,4 +1,4 @@
-package eg.gov.iti.jets.mad.foodplanner.Home;
+package eg.gov.iti.jets.mad.foodplanner.Home.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,14 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import eg.gov.iti.jets.mad.foodplanner.Database.ConcreteLocalSource;
+import eg.gov.iti.jets.mad.foodplanner.Database.Repository;
+import eg.gov.iti.jets.mad.foodplanner.Home.presenter.HomePresenter;
+import eg.gov.iti.jets.mad.foodplanner.Home.presenter.HomePresenterInterface;
 import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.MealInfoActivity;
 import eg.gov.iti.jets.mad.foodplanner.Model.Category;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
@@ -28,41 +34,46 @@ import eg.gov.iti.jets.mad.foodplanner.Network.Api_Service;
 import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
 import eg.gov.iti.jets.mad.foodplanner.R;
 
-public class HomeFragment extends Fragment implements Network_Delegate {
+public class HomeFragment extends Fragment implements HomeViewInterface,OnItemClickListener {
 
     ImageView mealImageView;
     TextView mealNameView;
     TextView countryMealName;
-    Api_Client api_client;
     Intent intent;
-
+    HomePresenterInterface homePresenterInterface;
+    ImageView heart_ImageView;
+    List<Meal> mealArrayList;
+    Meal meal;
     public HomeFragment() {
         // Required empty public constructor
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
     }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        api_client = Api_Client.getInstance();
-        api_client.randomMealCall(this);
+        homePresenterInterface=new HomePresenter(this,Repository.getInstance(Api_Client.getInstance(), ConcreteLocalSource.getInstance(getContext()),getContext()));
+        homePresenterInterface.getMeals();
+        mealArrayList=new ArrayList<>();
         mealImageView = view.findViewById(R.id.home_card_imageview);
         mealNameView = view.findViewById(R.id.home_meal_name_textview);
         countryMealName = view.findViewById(R.id.home_countryNameOfMeal_textView);
+        heart_ImageView=view.findViewById(R.id.home_card_fav_imageview);
+        heart_ImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                heart_ImageView.setImageResource(R.drawable.favorite_filled_black_icon);
+                Toast.makeText(getContext(), "added Successfully"+meal.strMeal, Toast.LENGTH_LONG).show();
+                addMeal(meal);
+            }
+        });
         mealImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,8 +86,8 @@ public class HomeFragment extends Fragment implements Network_Delegate {
     }
 
     @Override
-    public void onSuccessResult(ArrayList<Meal> myMeal) {
-
+    public void showData(List<Meal> myMeal) {
+        meal=myMeal.get(0);
         Glide.with(getContext()).load(myMeal.get(0).strMealThumb).apply(new RequestOptions().override(150, 150)
                 .placeholder(R.drawable.mealinfo)).into(mealImageView);
 
@@ -85,12 +96,12 @@ public class HomeFragment extends Fragment implements Network_Delegate {
     }
 
     @Override
-    public void onSuccessCategoryResult(ArrayList<Category> categories) {
-
+    public void addMeal(Meal meal) {
+        homePresenterInterface.addToFav(meal);
     }
 
     @Override
-    public void onFailureResult(String errorMessage) {
-
+    public void onItemClick(Meal meal) {
+        addMeal(meal);
     }
 }

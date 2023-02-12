@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="eg.gov.iti.jets.mad.foodplanner.Home.HomeFragment"
+        android:name="eg.gov.iti.jets.mad.foodplanner.Home.view.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/mealPlanFragment"
-        android:name="eg.gov.iti.jets.mad.foodplanner.MealPlan.MealPlanFragment"
+        android:name="eg.gov.iti.jets.mad.foodplanner.MealPlan.view.MealPlanFragment"
         android:label="fragment_meal_plan"
         tools:layout="@layout/fragment_meal_plan" />
     <fragment
@@ -27,7 +27,7 @@
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/favScreenFragment"
-        android:name="eg.gov.iti.jets.mad.foodplanner.favoriteScreen.FavScreenFragment"
+        android:name="eg.gov.iti.jets.mad.foodplanner.favoriteScreen.view.FavScreenFragment"
         android:label="fragment_fav_screen"
         tools:layout="@layout/fragment_fav_screen" />
 </navigation>

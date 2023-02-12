@@ -23,11 +23,11 @@ import eg.gov.iti.jets.mad.foodplanner.R;
 public class IngredientImagesAdapter extends RecyclerView.Adapter<IngredientImagesAdapter.ViewHolder>{
 
     private final Context context;
-    private ArrayList<Meal> ingredients;
+    private List<Meal> ingredients;
 
     IngredientClickListener ingredientClickListener;
 
-    public IngredientImagesAdapter(Context context, ArrayList<Meal> ingredients,IngredientClickListener ingredientClickListener) {
+    public IngredientImagesAdapter(Context context, List<Meal> ingredients,IngredientClickListener ingredientClickListener) {
         this.context = context;
         this.ingredients = ingredients;
         this.ingredientClickListener=ingredientClickListener;

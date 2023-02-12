@@ -1,0 +1,28 @@
+package eg.gov.iti.jets.mad.foodplanner.favoriteScreen.presenter;
+
+import androidx.lifecycle.LiveData;
+
+import java.util.List;
+
+import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
+import eg.gov.iti.jets.mad.foodplanner.Database.RepositoryInterface;
+import eg.gov.iti.jets.mad.foodplanner.favoriteScreen.view.FavViewInterface;
+
+public class FavPresenter implements FavPresenterInterface {
+    private FavViewInterface favViewInterface;
+    private RepositoryInterface repositoryInterface;
+    public FavPresenter(FavViewInterface viewInterface , RepositoryInterface repositoryInterface){
+        this.favViewInterface=viewInterface;
+        this.repositoryInterface=repositoryInterface;
+    }
+    @Override
+    public LiveData<List<Meal>> getMeals() {
+        return repositoryInterface.getAllStoredMeals();
+    }
+
+    @Override
+    public void deleteFromFav(Meal meal) {
+        repositoryInterface.deleteMeal(meal);
+    }
+
+}
