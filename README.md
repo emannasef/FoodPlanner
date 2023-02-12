@@ -5,7 +5,7 @@ Android Applicication help users that interested in cooking.
 
 
 
-**Main features:
+*Main features:
 
 - Random meals
 
@@ -17,14 +17,30 @@ Android Applicication help users that interested in cooking.
 
 - Authentication by email, google and guest
 
-- Backup for saved meals and weekly meals planned
 
 
 
 
 
 
-**Technology used in our project:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*Technology used in our project:
 
 - Java Language
 
