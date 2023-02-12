@@ -5,7 +5,7 @@ Android Applicication help users that interested in cooking.
 
 
 
-*Main features:
+Main features:
 
 - Random meals
 
@@ -29,18 +29,9 @@ Android Applicication help users that interested in cooking.
 
 
 
+Technology used in our project:
 
 
-
-
-
-
-
-
-
-
-
-*Technology used in our project:
 
 - Java Language
 
