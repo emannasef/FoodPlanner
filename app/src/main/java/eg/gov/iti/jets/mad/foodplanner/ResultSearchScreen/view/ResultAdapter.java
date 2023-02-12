@@ -75,37 +75,30 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
                 popup.getMenuInflater().inflate(R.menu.days_menu, popup.getMenu());
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(context, item.getTitle(), Toast.LENGTH_SHORT).show();
                         if (item.getTitle().equals("Sunday")) {
                          MealPlan myMealPlan= convertMeal("Sunday",result);
-                            Toast.makeText(context, myMealPlan.strMeal, Toast.LENGTH_SHORT).show();
                             resultMealClickListener.onAddToMealPlanClick(myMealPlan);
                         }
                         else if (item.getTitle().equals("Monday")) {
                             MealPlan myMealPlan= convertMeal("Monday",result);
-                            Toast.makeText(context, myMealPlan.strMeal, Toast.LENGTH_SHORT).show();
                             resultMealClickListener.onAddToMealPlanClick(myMealPlan);
                         }else if (item.getTitle().equals("Tuesday")) {
                             MealPlan myMealPlan= convertMeal("Tuesday",result);
-                            Toast.makeText(context, myMealPlan.strMeal, Toast.LENGTH_SHORT).show();
                             resultMealClickListener.onAddToMealPlanClick(myMealPlan);
                         }else if (item.getTitle().equals("Wednesday")) {
                             MealPlan myMealPlan= convertMeal("Wednesday",result);
-                            Toast.makeText(context, myMealPlan.strMeal, Toast.LENGTH_SHORT).show();
                             resultMealClickListener.onAddToMealPlanClick(myMealPlan);
                         }else if (item.getTitle().equals("Thursday")) {
                             MealPlan myMealPlan= convertMeal("Thursday",result);
-                            Toast.makeText(context, myMealPlan.strMeal, Toast.LENGTH_SHORT).show();
                             resultMealClickListener.onAddToMealPlanClick(myMealPlan);
                         }else if (item.getTitle().equals("Friday")) {
                             MealPlan myMealPlan= convertMeal("Friday",result);
-                            Toast.makeText(context, myMealPlan.strMeal, Toast.LENGTH_SHORT).show();
                             resultMealClickListener.onAddToMealPlanClick(myMealPlan);
                         }else if (item.getTitle().equals("Saturday")) {
                             MealPlan myMealPlan= convertMeal("Saturday",result);
-                            Toast.makeText(context, myMealPlan.strMeal, Toast.LENGTH_SHORT).show();
                             resultMealClickListener.onAddToMealPlanClick(myMealPlan);
                         }
+                        Toast.makeText(context, "Added To Plan", Toast.LENGTH_SHORT).show();
                         holder.addToMealPlanImage.setImageResource(R.drawable.add_icon);
                         return true;
                     }

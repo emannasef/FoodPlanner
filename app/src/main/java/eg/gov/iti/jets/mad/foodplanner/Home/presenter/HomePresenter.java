@@ -43,4 +43,11 @@ public class HomePresenter implements HomePresenterInterface, Network_Delegate {
     public void removeFromFav(Meal meal) {
         repositoryInterface.deleteMeal(meal);
     }
+
+    @Override
+    public void addDataToFirebase(String mealName, String mealImage, String mealCountryName) {
+        repositoryInterface.pushToFireStore(mealName,mealImage,mealCountryName);
+    }
+
+
 }

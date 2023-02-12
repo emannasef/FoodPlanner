@@ -16,8 +16,6 @@ import io.reactivex.rxjava3.core.Flowable;
 
 @Dao
 public interface MealDAO {
-   /* @Query("SELECT * from Meal")
-    LiveData<List<Meal>> getAllMeals();*/
 
     @Query("SELECT * from Meal where MealUserEmail Like :email")
     LiveData<List<Meal>> getAllFavMeals(String email);

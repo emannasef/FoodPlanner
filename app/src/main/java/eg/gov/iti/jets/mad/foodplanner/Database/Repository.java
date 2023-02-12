@@ -86,10 +86,6 @@ public class Repository implements RepositoryInterface {
         remoteSource.getIngredientCall(networkDelegate);
     }
 
-   /* @Override
-    public LiveData<List<Meal>> getAllStoredMeals() {
-        return localSource.getAllStoredMeals();
-    }*/
 
     @Override
     public LiveData<List<MealPlan>> getAllStoredMeals_MealPlan(String email) {
@@ -104,6 +100,11 @@ public class Repository implements RepositoryInterface {
     @Override
     public void deleteMeal_MealPlan(MealPlan mealPlan) {
         localSource.deleteMeal_MealPlan(mealPlan);
+    }
+
+    @Override
+    public void pushToFireStore(String mealName, String mealImage, String mealCountryName) {
+        remoteSource.pushToFireStore(mealName,mealImage,mealCountryName);
     }
 
     public LiveData<List<Meal>> getAllStoredFavMeals(String email) {

@@ -27,5 +27,6 @@ public interface RepositoryInterface {
     void insertMeal_MealPlan(MealPlan mealPlan);
     void deleteMeal_MealPlan(MealPlan mealPlan);
 
+   void pushToFireStore(String mealName , String mealImage , String mealCountryName);
 
 }

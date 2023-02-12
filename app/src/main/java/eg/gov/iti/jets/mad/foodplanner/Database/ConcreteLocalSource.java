@@ -28,8 +28,6 @@ public class ConcreteLocalSource implements LocalSource {
         AppDatabase db = AppDatabase.getInstance(context.getApplicationContext());
         dao=db.mealDAO();
         mealPlanDAO=db.mealPlanDAO();
-        //storedMeals=dao.getAllMeals();
-       // storedMeals_MealPlan=mealPlanDAO.getAllMeals_MealPlan(sharedPref.read());
 
     }
     public static ConcreteLocalSource getInstance(Context context){
@@ -59,15 +57,10 @@ public class ConcreteLocalSource implements LocalSource {
             }
         }).start();
     }
-  /*  @Override
-    public LiveData<List<Meal>> getAllStoredMeals() {
-        return storedMeals;
-    }*/
+
 
     @Override
     public LiveData<List<MealPlan>> getAllStoredMeals_MealPlan(String email) {
-       // Log.i(TAG, "getAllStoredMeals_MealPlan:ConcreteLocal"+storedMeals_MealPlan);
-       // return storedMeals_MealPlan;
         return  mealPlanDAO.getAllMeals_MealPlan(email);
     }
 

@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="eg.gov.iti.jets.mad.foodplanner.Profile.ProfileFragment"
+        android:name="eg.gov.iti.jets.mad.foodplanner.Profile.view.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
