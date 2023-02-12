@@ -1,6 +1,7 @@
 package eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.view.MealInfoActivity;
 
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
+import eg.gov.iti.jets.mad.foodplanner.Model.MealPlan;
 import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
 import eg.gov.iti.jets.mad.foodplanner.R;
 import eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.presenter.ResultSearchPresenter;
@@ -98,16 +100,24 @@ public class ResultSearchActivity extends AppCompatActivity implements  ResultMe
     }
 
     @Override
-    public void deleteMeal(Meal meal) {
-        resultSearchPresenterInterface.deleteFromFav(meal);
-    }
+    public void addMeal_MeaPlan(MealPlan meal) {
+        resultSearchPresenterInterface.addToMealPlan(meal);
 
+    }
+    public void deleteMeal(Meal meal) {
+        resultSearchPresenterInterface.deleteFromFav(meal);}
     @Override
     public void onImageClick(String name) {
         Intent intent = new Intent(ResultSearchActivity.this, MealInfoActivity.class);
         intent.putExtra("mealName",name);
         startActivity(intent);
     }
+
+    @Override
+    public void onheartClick(Meal result) {
+
+    }
+
 
     @Override
     public void onheartClick(Meal result, String method) {
@@ -117,4 +127,10 @@ public class ResultSearchActivity extends AppCompatActivity implements  ResultMe
             deleteMeal(result);
         }
     }
+
+    @Override
+    public void onAddToMealPlanClick(MealPlan result) {
+        addMeal_MeaPlan(result);
+    }
+
 }

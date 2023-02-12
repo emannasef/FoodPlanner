@@ -3,7 +3,8 @@ package eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.presenter;
 import java.util.List;
 import eg.gov.iti.jets.mad.foodplanner.Model.Category;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
-import eg.gov.iti.jets.mad.foodplanner.Model.RepositoryInterface;
+import eg.gov.iti.jets.mad.foodplanner.Database.RepositoryInterface;
+import eg.gov.iti.jets.mad.foodplanner.Model.MealPlan;
 import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
 import eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.view.ResultAdapter;
 import eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.view.ResultSearchViewInterface;
@@ -42,9 +43,13 @@ public class ResultSearchPresenter implements ResultSearchPresenterInterface, Ne
     }
 
     @Override
-    public void deleteFromFav(Meal meal) {
-        repositoryInterface.deleteMeal(meal);
+    public void addToMealPlan(MealPlan meal) {
+        repositoryInterface.insertMeal_MealPlan(meal);
+
     }
+
+    public void deleteFromFav(Meal meal) {
+        repositoryInterface.deleteMeal(meal);}
 
     @Override
     public void onSuccessResult(List<Meal> myMeal) {

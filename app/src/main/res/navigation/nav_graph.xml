@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/mealPlanFragment"
-        android:name="eg.gov.iti.jets.mad.foodplanner.MealPlan.MealPlanFragment"
+        android:name="eg.gov.iti.jets.mad.foodplanner.MealPlan.view.MealPlanFragment"
         android:label="fragment_meal_plan"
         tools:layout="@layout/fragment_meal_plan" />
     <fragment

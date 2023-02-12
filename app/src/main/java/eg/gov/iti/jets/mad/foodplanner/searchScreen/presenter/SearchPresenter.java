@@ -2,9 +2,10 @@ package eg.gov.iti.jets.mad.foodplanner.searchScreen.presenter;
 
 import java.util.List;
 
+import eg.gov.iti.jets.mad.foodplanner.Database.RepositoryInterface;
 import eg.gov.iti.jets.mad.foodplanner.Model.Category;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
-import eg.gov.iti.jets.mad.foodplanner.Model.RepositoryInterface;
+
 import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
 import eg.gov.iti.jets.mad.foodplanner.searchScreen.view.SearchViewInterface;
 

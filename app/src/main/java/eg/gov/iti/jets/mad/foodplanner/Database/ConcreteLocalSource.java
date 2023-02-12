@@ -1,26 +1,32 @@
 package eg.gov.iti.jets.mad.foodplanner.Database;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
-import io.reactivex.rxjava3.core.Flowable;
+import eg.gov.iti.jets.mad.foodplanner.Model.MealPlan;
 
 public class ConcreteLocalSource implements LocalSource {
 
+    private static final String TAG = "ConcreteLocalSource";
     private MealDAO dao;
+    private MealPlanDAO mealPlanDAO;
     private static ConcreteLocalSource concerteLocalSource =null;
     private LiveData<List<Meal>> storedMeals;
     private LiveData<List<Meal>> storedFavMeals;
 
+    private LiveData<List<MealPlan>> storedMeals_MealPlan;
+
     private ConcreteLocalSource(Context context){
         AppDatabase db = AppDatabase.getInstance(context.getApplicationContext());
         dao=db.mealDAO();
+        mealPlanDAO=db.mealPlanDAO();
         storedMeals=dao.getAllMeals();
+        storedMeals_MealPlan=mealPlanDAO.getAllMeals_MealPlan();
 
     }
     public static ConcreteLocalSource getInstance(Context context){
@@ -39,6 +45,7 @@ public class ConcreteLocalSource implements LocalSource {
         }).start();
 
     }
+
     @Override
     public void deleteMeal(Meal meal) {
 
@@ -55,6 +62,30 @@ public class ConcreteLocalSource implements LocalSource {
     }
 
     @Override
+    public LiveData<List<MealPlan>> getAllStoredMeals_MealPlan() {
+        Log.i(TAG, "getAllStoredMeals_MealPlan:ConcreteLocal"+storedMeals_MealPlan);
+        return storedMeals_MealPlan;
+    }
+
+    @Override
+    public void insertMeal_MealPlan(MealPlan meal) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mealPlanDAO.insertMeal_MealPlan(meal);
+            }
+        }).start();
+    }
+
+    @Override
+    public void deleteMeal_MealPlan(MealPlan meal) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mealPlanDAO.deleteMeal_MealPlan(meal);
+            }
+        }).start();
+    }
     public LiveData<List<Meal>> getAllStoredFavMeals(String email) {
         return dao.getAllFavMeals(email);
     }

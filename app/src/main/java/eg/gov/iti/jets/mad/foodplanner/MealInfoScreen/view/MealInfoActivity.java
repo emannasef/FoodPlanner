@@ -25,12 +25,12 @@ import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.Database.ConcreteLocalSource;
 import eg.gov.iti.jets.mad.foodplanner.Database.Repository;
+import eg.gov.iti.jets.mad.foodplanner.Database.RepositoryInterface;
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.presenter.MealInfoPresenter;
 import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.presenter.MealInfoPresenterInterface;
 import eg.gov.iti.jets.mad.foodplanner.Model.Category;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
-import eg.gov.iti.jets.mad.foodplanner.Model.RepositoryInterface;
 import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
 import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
 import eg.gov.iti.jets.mad.foodplanner.R;

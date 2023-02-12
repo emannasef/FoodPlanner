@@ -1,10 +1,12 @@
-package eg.gov.iti.jets.mad.foodplanner.Model;
+package eg.gov.iti.jets.mad.foodplanner.Database;
 
 import androidx.lifecycle.LiveData;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
+import eg.gov.iti.jets.mad.foodplanner.Model.MealPlan;
 import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
 
 public interface RepositoryInterface {
@@ -20,5 +22,10 @@ public interface RepositoryInterface {
     public void getIngredient(Network_Delegate networkDelegate);
     LiveData<List<Meal>> getAllStoredMeals();
     LiveData<List<Meal>> getAllStoredFavMeals(String email);
+    LiveData<List<MealPlan>> getAllStoredMeals_MealPlan();
+
+    void insertMeal_MealPlan(MealPlan mealPlan);
+
+    void deleteMeal_MealPlan(MealPlan mealPlan);
 
 }

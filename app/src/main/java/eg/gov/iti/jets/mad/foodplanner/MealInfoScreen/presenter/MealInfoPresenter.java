@@ -2,10 +2,10 @@ package eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.presenter;
 
 import java.util.List;
 
+import eg.gov.iti.jets.mad.foodplanner.Database.RepositoryInterface;
 import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.view.MealInfoViewInterface;
 import eg.gov.iti.jets.mad.foodplanner.Model.Category;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
-import eg.gov.iti.jets.mad.foodplanner.Model.RepositoryInterface;
 import eg.gov.iti.jets.mad.foodplanner.Network.Network_Delegate;
 
 public class MealInfoPresenter implements Network_Delegate,MealInfoPresenterInterface {
