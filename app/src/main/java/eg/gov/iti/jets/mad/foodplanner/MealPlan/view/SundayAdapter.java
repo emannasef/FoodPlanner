@@ -57,7 +57,6 @@ public class SundayAdapter extends RecyclerView.Adapter<SundayAdapter.ViewHolder
                         .error(R.drawable.ic_launcher_foreground))
                 .into(holder.mealImageView);
 
-        Toast.makeText(context, "#**"+mealPlan.getDay(), Toast.LENGTH_SHORT).show();
 
         holder.mealNameTextView.setText(sundayMeals.get(position).getStrMeal());
         holder.deleteMealImageView.setOnClickListener(new View.OnClickListener() {

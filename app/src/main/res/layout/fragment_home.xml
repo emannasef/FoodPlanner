@@ -81,18 +81,6 @@
                 app:layout_constraintTop_toBottomOf="@id/home_meal_name_textview" />
 
             <ImageView
-                android:id="@+id/home_card_fav_imageview"
-                android:layout_width="43dp"
-                android:layout_height="47dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="28dp"
-                android:background="#57FFFFFF"
-                android:backgroundTint="#2AFFFFFF"
-                app:layout_constraintEnd_toEndOf="@id/home_card_imageview"
-                app:layout_constraintTop_toBottomOf="@+id/home_card_imageview"
-                app:srcCompat="@drawable/favorite_outline_icon" />
-
-            <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="26dp"
                 android:layout_height="18dp"

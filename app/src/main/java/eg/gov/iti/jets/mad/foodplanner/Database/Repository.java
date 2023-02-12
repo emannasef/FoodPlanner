@@ -86,10 +86,6 @@ public class Repository implements RepositoryInterface {
         remoteSource.getIngredientCall(networkDelegate);
     }
 
-   /* @Override
-    public LiveData<List<Meal>> getAllStoredMeals() {
-        return localSource.getAllStoredMeals();
-    }*/
 
     @Override
     public LiveData<List<MealPlan>> getAllStoredMeals_MealPlan(String email) {

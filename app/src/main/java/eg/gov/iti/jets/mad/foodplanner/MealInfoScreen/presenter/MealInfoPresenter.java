@@ -1,5 +1,7 @@
 package eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.presenter;
 
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.Database.RepositoryInterface;
@@ -21,6 +23,11 @@ public class MealInfoPresenter implements Network_Delegate,MealInfoPresenterInte
     @Override
     public void getMeals(String name) {
         repositoryInterface.getinfoMeals(this,name);
+    }
+
+    @Override
+    public LiveData<List<Meal>> getStoredMeals(String email) {
+        return repositoryInterface.getAllStoredFavMeals(email);
     }
 
     @Override
