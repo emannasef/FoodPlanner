@@ -89,8 +89,6 @@ TextView alreadyHaveAnAccountTextView;
                 startActivity(i);
             }
         });
-
-
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +96,6 @@ TextView alreadyHaveAnAccountTextView;
 
             }
         });
-
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,7 +152,6 @@ TextView alreadyHaveAnAccountTextView;
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User cancelled the dialog
             }
         });
         builder.create().show();

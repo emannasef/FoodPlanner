@@ -129,7 +129,6 @@ public class MealInfoActivity extends AppCompatActivity implements MealInfoViewI
         mealName.setText(myMeal.get(0).strMeal);
         countryName.setText(myMeal.get(0).strArea);
         steps.setText(myMeal.get(0).strInstructions);
-        Toast.makeText(this, "fav "+meal.isFav+" name "+meal.strMeal, Toast.LENGTH_SHORT).show();
         if(meal.isFav==true /*&& meal.userEmail.equals(user.getEmail())*/) {
             heartImageView.setImageResource(R.drawable.favorite_filled_black_icon);
         }

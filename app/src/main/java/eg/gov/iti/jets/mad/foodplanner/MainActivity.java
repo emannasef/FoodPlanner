@@ -6,10 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,15 +15,13 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.navigation.NavigationView;
 
 import eg.gov.iti.jets.mad.foodplanner.Home.view.HomeFragment;
 import eg.gov.iti.jets.mad.foodplanner.MealPlan.MealPlanFragment;
 import eg.gov.iti.jets.mad.foodplanner.Profile.ProfileFragment;
 import eg.gov.iti.jets.mad.foodplanner.favoriteScreen.view.FavScreenFragment;
 import eg.gov.iti.jets.mad.foodplanner.loginScreen.SharedPref;
-import eg.gov.iti.jets.mad.foodplanner.searchScreen.searchFragment;
-import eg.gov.iti.jets.mad.foodplanner.splashScreen.view.SplashScreen;
+import eg.gov.iti.jets.mad.foodplanner.searchScreen.view.searchFragment;
 import eg.gov.iti.jets.mad.foodplanner.welcomeScreen.WelcomeScreen;
 
 

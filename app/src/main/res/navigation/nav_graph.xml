@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_meal_plan" />
     <fragment
         android:id="@+id/searchFragment2"
-        android:name="eg.gov.iti.jets.mad.foodplanner.searchScreen.searchFragment"
+        android:name="eg.gov.iti.jets.mad.foodplanner.searchScreen.view.searchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment

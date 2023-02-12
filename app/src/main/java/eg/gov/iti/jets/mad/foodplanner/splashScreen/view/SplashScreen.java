@@ -22,8 +22,6 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-//                Intent intent = new Intent(SplashScreen.this, WelcomeScreen.class);
-//                startActivity(intent);
                 String sharedVal = sharedPref.read();
                 if (sharedVal.equals("foodPlanner@gmail.com")) {
                      startActivity(new Intent(SplashScreen.this, WelcomeScreen.class));

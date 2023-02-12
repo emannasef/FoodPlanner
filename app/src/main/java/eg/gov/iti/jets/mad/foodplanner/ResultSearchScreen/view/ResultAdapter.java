@@ -61,7 +61,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
             public void onClick(View v) {
                 if(result.isFav==false) {
                     holder.heart_imageView.setImageResource(R.drawable.favorite_filled_black_icon);
-                    Toast.makeText(context, "Added to favorite#", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Added to favorite", Toast.LENGTH_SHORT).show();
                     result.isFav = true;
                     resultMealClickListener.onheartClick(result,"add");
                 }
