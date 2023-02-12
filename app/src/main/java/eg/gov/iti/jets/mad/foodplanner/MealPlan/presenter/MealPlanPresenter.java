@@ -19,8 +19,8 @@ public class MealPlanPresenter implements MealPlanPresenterInterface {
     }
 
     @Override
-    public LiveData<List<MealPlan>> getMealsInMealPlan() {
-        return repositoryInterface.getAllStoredMeals_MealPlan();
+    public LiveData<List<MealPlan>> getMealsInMealPlan(String email) {
+        return repositoryInterface.getAllStoredMeals_MealPlan(email);
     }
 
     @Override

@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.Model.User;
 import eg.gov.iti.jets.mad.foodplanner.R;
+import eg.gov.iti.jets.mad.foodplanner.loginScreen.SharedPref;
 import eg.gov.iti.jets.mad.foodplanner.signupScreen.presenter.SignupPresenter;
 import eg.gov.iti.jets.mad.foodplanner.welcomeScreen.WelcomeScreen;
 
@@ -34,12 +35,13 @@ public class SignupScreen extends AppCompatActivity implements SignupViewInterfa
     EditText email_editText;
     EditText password_editText;
     EditText confirmPassword_editText;
+    SharedPref sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_screen);
-
+        sharedPref=new SharedPref(this);
         name_editText =findViewById(R.id.name_EditText);
         email_editText =findViewById(R.id.email_EditText);
         password_editText=findViewById(R.id.password_EditText);
@@ -59,6 +61,7 @@ public class SignupScreen extends AppCompatActivity implements SignupViewInterfa
 
                 if(!name.isEmpty()&&!email.isEmpty()&&password.equals(confirmPassword)&&!password.isEmpty()) {
                     signupPresenter.signup(name,email,password,confirmPassword);
+                    sharedPref.write(email);
                 }else{
                     if((name.isEmpty()||name==null)&&(email.isEmpty()||email==null)&&(password.isEmpty()||password==null)&&(confirmPassword.isEmpty()||confirmPassword==null)){
                         name_editText.setError("Name can't be empty");

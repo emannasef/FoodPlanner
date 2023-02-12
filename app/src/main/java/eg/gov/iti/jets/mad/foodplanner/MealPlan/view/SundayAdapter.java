@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -56,11 +57,19 @@ public class SundayAdapter extends RecyclerView.Adapter<SundayAdapter.ViewHolder
                         .error(R.drawable.ic_launcher_foreground))
                 .into(holder.mealImageView);
 
+        Toast.makeText(context, "#**"+mealPlan.getDay(), Toast.LENGTH_SHORT).show();
+
         holder.mealNameTextView.setText(sundayMeals.get(position).getStrMeal());
         holder.deleteMealImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onDayClickListener.onDayDeleteClick(mealPlan);
+            }
+        });
+        holder.mealImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDayClickListener.onImageClick(holder.mealNameTextView.getText().toString());
             }
         });
     }

@@ -7,7 +7,7 @@ import java.util.List;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 
 public interface FavPresenterInterface {
-    public LiveData<List<Meal>> getMeals();
+   // public LiveData<List<Meal>> getMeals();
     public LiveData<List<Meal>> getFavMeals(String email);
     public void deleteFromFav(Meal meal);
 

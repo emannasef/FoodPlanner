@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -55,11 +56,18 @@ public class FridayAdapter extends RecyclerView.Adapter<FridayAdapter.ViewHolder
                         .error(R.drawable.ic_launcher_foreground))
                 .into(holder.mealImageView);
 
+
         holder.mealNameTextView.setText(fridayMeals.get(position).strMeal);
         holder.deleteMealImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onDayClickListener.onDayDeleteClick(mealPlan);
+            }
+        });
+        holder.mealImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDayClickListener.onImageClick(holder.mealNameTextView.getText().toString());
             }
         });
     }

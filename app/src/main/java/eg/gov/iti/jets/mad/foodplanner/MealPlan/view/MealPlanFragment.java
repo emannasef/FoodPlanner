@@ -1,5 +1,6 @@
 package eg.gov.iti.jets.mad.foodplanner.MealPlan.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,11 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.Database.ConcreteLocalSource;
 import eg.gov.iti.jets.mad.foodplanner.Database.Repository;
+import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.view.MealInfoActivity;
 import eg.gov.iti.jets.mad.foodplanner.MealPlan.presenter.MealPlanPresenter;
 import eg.gov.iti.jets.mad.foodplanner.MealPlan.presenter.MealPlanPresenterInterface;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
@@ -27,6 +31,7 @@ import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
 import eg.gov.iti.jets.mad.foodplanner.R;
 import eg.gov.iti.jets.mad.foodplanner.favoriteScreen.presenter.FavPresenter;
 import eg.gov.iti.jets.mad.foodplanner.favoriteScreen.view.favMealAdapter;
+import eg.gov.iti.jets.mad.foodplanner.loginScreen.SharedPref;
 
 
 public class MealPlanFragment extends Fragment implements OnDayClickListener, MealPlanViewInterface {
@@ -56,6 +61,7 @@ public class MealPlanFragment extends Fragment implements OnDayClickListener, Me
     List<MealPlan> myWedenesdayList;
     List<MealPlan> myThursdayList;
     List<MealPlan> myFridayList;
+    SharedPref sharedPref;
 
     public MealPlanFragment() {
         // Required empty public constructor
@@ -78,8 +84,8 @@ public class MealPlanFragment extends Fragment implements OnDayClickListener, Me
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        sharedPref=new SharedPref(getContext());
         mealPlanPresenterInterface = new MealPlanPresenter(this, Repository.getInstance(Api_Client.getInstance(), ConcreteLocalSource.getInstance(getContext()), getContext()));
-
 
         sundayRecyclerView = view.findViewById(R.id.sundayRecyclerView);
         sundayRecyclerView.setHasFixedSize(true);
@@ -103,16 +109,12 @@ public class MealPlanFragment extends Fragment implements OnDayClickListener, Me
         mondayRecyclerView.setLayoutManager(mondayLayoutManager);
         mondayAdapter = new MondayAdapter(getContext(), this);
 
-
-
         tuesdayRecyclerView = view.findViewById(R.id.tusedayRecyclerView);
         tuesdayRecyclerView.setHasFixedSize(true);
         LinearLayoutManager tuesdayLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         tuesdayLayoutManager.setOrientation(tuesdayLayoutManager.HORIZONTAL);
         tuesdayRecyclerView.setLayoutManager(tuesdayLayoutManager);
         tuesdayAdapter = new TuesdayAdapter(getContext(), this);
-
-
 
         wedenesdayRecyclerView = view.findViewById(R.id.wednesdayRecyclerView);
         wedenesdayRecyclerView.setHasFixedSize(true);
@@ -121,8 +123,6 @@ public class MealPlanFragment extends Fragment implements OnDayClickListener, Me
         wedenesdayRecyclerView.setLayoutManager(wedenesdayLayoutManager);
         wedenesdayAdapter = new WedensdayAdapter(getContext(),this);
 
-
-
         thursdayRecyclerView = view.findViewById(R.id.thursdayRecycleView);
         thursdayRecyclerView.setHasFixedSize(true);
         LinearLayoutManager  thursdayLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -130,17 +130,12 @@ public class MealPlanFragment extends Fragment implements OnDayClickListener, Me
         thursdayRecyclerView.setLayoutManager( thursdayLayoutManager);
         thursdayAdapter = new  ThursdayAdapter(getContext(), this);
 
-
-
         fridayRecyclerView = view.findViewById(R.id.fridayRecycleView);
         fridayRecyclerView.setHasFixedSize(true);
         LinearLayoutManager fridayLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         fridayLayoutManager.setOrientation(fridayLayoutManager.HORIZONTAL);
         fridayRecyclerView.setLayoutManager(fridayLayoutManager);
         fridayAdapter = new FridayAdapter(getContext(), this);
-
-
-
 
         mySundayList =   new ArrayList<MealPlan>();
         myMondayList =   new ArrayList<MealPlan>();
@@ -150,31 +145,44 @@ public class MealPlanFragment extends Fragment implements OnDayClickListener, Me
         myThursdayList = new ArrayList<MealPlan>();
         myFridayList = new ArrayList<MealPlan>();
 
-        showData();
+        showData(sharedPref.read());
 
     }
 
 
     @Override
-    public void showData() {
-        mealPlanPresenterInterface.getMealsInMealPlan().observe(getViewLifecycleOwner(), new Observer<List<MealPlan>>() {
+    public void goToMealInfo(String mealName) {
+        Intent i = new Intent(getContext(), MealInfoActivity.class);
+        i.putExtra("mealName",mealName);
+        startActivity(i);
+    }
+
+    @Override
+    public void showData(String email) {
+        mealPlanPresenterInterface.getMealsInMealPlan(email).observe(getViewLifecycleOwner(), new Observer<List<MealPlan>>() {
             @Override
             public void onChanged(List<MealPlan> mealPlans) {
 
                 for (int i = 0; i < mealPlans.size(); i++) {
                     if (mealPlans.get(i).getDay().equals("Sunday")) {
                         mySundayList.add(mealPlans.get(i));
-                    } else if (mealPlans.get(i).getDay().equals("Monday")) {
+                    }
+                    else if (mealPlans.get(i).getDay().equals("Monday")) {
                         myMondayList.add(mealPlans.get(i));
-                    }else if (mealPlans.get(i).getDay().equals("Saturday")) {
+                    }
+                    else if (mealPlans.get(i).getDay().equals("Saturday")) {
                         mySaturdayList.add(mealPlans.get(i));
-                    }else if (mealPlans.get(i).getDay().equals("Tuesday")) {
+                    }
+                    else if (mealPlans.get(i).getDay().equals("Tuesday")) {
                         myTuesdayList.add(mealPlans.get(i));
-                    }else if (mealPlans.get(i).getDay().equals("Wednesday")) {
+                    }
+                    else if (mealPlans.get(i).getDay().equals("Wednesday")) {
                         myWedenesdayList.add(mealPlans.get(i));
-                    }else if (mealPlans.get(i).getDay().equals("Thursday")) {
+                    }
+                    else if (mealPlans.get(i).getDay().equals("Thursday")) {
                         myThursdayList.add(mealPlans.get(i));
-                    }else if (mealPlans.get(i).getDay().equals("Friday")) {
+                    }
+                    else if (mealPlans.get(i).getDay().equals("Friday")) {
                         myFridayList.add(mealPlans.get(i));
                     }
                 }
@@ -199,6 +207,14 @@ public class MealPlanFragment extends Fragment implements OnDayClickListener, Me
 
                 fridayAdapter.setFridayList(myFridayList);
                 fridayRecyclerView.setAdapter(fridayAdapter);
+
+                mySundayList =   new ArrayList<MealPlan>();
+                myMondayList =   new ArrayList<MealPlan>();
+                mySaturdayList=new ArrayList<MealPlan>();
+                myTuesdayList = new ArrayList<MealPlan>();
+                myWedenesdayList = new ArrayList<MealPlan>();
+                myThursdayList = new ArrayList<MealPlan>();
+                myFridayList = new ArrayList<MealPlan>();
             }
         });
     }
@@ -209,41 +225,33 @@ public class MealPlanFragment extends Fragment implements OnDayClickListener, Me
     }
 
     @Override
+    public void onImageClick(String mealName) {
+        goToMealInfo(mealName);
+    }
+
+    @Override
     public void onDayDeleteClick(MealPlan meal) {
 
         if (meal.getDay().equals("Sunday")) {
-           // mySundayList.remove(meal);
             deleteMealFromMealPlan(meal);
-           // sundayAdapter.notifyDataSetChanged();
-
-
-        } if (meal.getDay().equals("Monday")) {
-          //  myMondayList.remove(meal);
-            deleteMealFromMealPlan(meal);
-          //  mondayAdapter.notifyDataSetChanged();
         }
-
-        if (meal.getDay().equals("Saturday")) {
-            //  mySaturdayList.remove(meal);
+        else if (meal.getDay().equals("Monday")) {
             deleteMealFromMealPlan(meal);
-            //  saturdayAdapter.notifyDataSetChanged();
         }
-        if (meal.getDay().equals("Tuesday")) {
-            //  myTuesdayList.remove(meal);
+        else if (meal.getDay().equals("Saturday")) {
             deleteMealFromMealPlan(meal);
-            //  tuesdayAdapter.notifyDataSetChanged();
-        }if (meal.getDay().equals("Wednesday")) {
-            //  myWednesdayList.remove(meal);
+        }
+        else if (meal.getDay().equals("Tuesday")) {
             deleteMealFromMealPlan(meal);
-            //  wednesdayAdapter.notifyDataSetChanged();
-        }if (meal.getDay().equals("Thursday")) {
-            //  myThursdayList.remove(meal);
+        }
+        else if (meal.getDay().equals("Wednesday")) {
             deleteMealFromMealPlan(meal);
-            //  thursdayAdapter.notifyDataSetChanged();
-        }if (meal.getDay().equals("Friday")) {
-            //  myFridayList.remove(meal);
+        }
+        else if (meal.getDay().equals("Thursday")) {
             deleteMealFromMealPlan(meal);
-            //  fridayAdapter.notifyDataSetChanged();
+        }
+        else if (meal.getDay().equals("Friday")) {
+            deleteMealFromMealPlan(meal);
         }
 
     }

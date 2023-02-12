@@ -31,8 +31,6 @@ public class ResultSearchActivity extends AppCompatActivity implements  ResultMe
     ImageButton backResult_btn;
     RecyclerView recyclerView;
     ResultSearchPresenterInterface resultSearchPresenterInterface;
-
-    Api_Client api_client;
     Intent intent;
     ArrayList<Meal> countryMealsResult = new ArrayList();
     ArrayList<Meal> ingredientMealsResult = new ArrayList();
@@ -41,22 +39,19 @@ public class ResultSearchActivity extends AppCompatActivity implements  ResultMe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_search);
-        //api_client=Api_Client.getInstance();
+
         resultSearchPresenterInterface=new ResultSearchPresenter(this, Repository.getInstance(Api_Client.getInstance(), ConcreteLocalSource.getInstance(this),this));
         intent=getIntent();
+
         if(intent.getStringExtra("searchType").equals("category")) {
-             //api_client.searchBycategoryCall(this,intent.getStringExtra("searchCategory"));
             resultSearchPresenterInterface.getMeals("searchCategory",intent.getStringExtra("searchCategory"));
         }
         else if(intent.getStringExtra("searchType").equals("name")) {
-           // api_client.mealInfoCall(this, intent.getStringExtra("searchName"));
             resultSearchPresenterInterface.getMeals("searchName",intent.getStringExtra("searchName"));
         }
         else if(intent.getStringExtra("searchType").equals("country")) {
-            //api_client.getMealsByCountryCall(this, intent.getStringExtra("countryName"));
             resultSearchPresenterInterface.getMeals("countryName",intent.getStringExtra("countryName"));
         }else if (intent.getStringExtra("searchType").equals("ingredient")){
-            //api_client.getMealsByIngredientCall(this, intent.getStringExtra("ingredientName"));
             resultSearchPresenterInterface.getMeals("ingredientName",intent.getStringExtra("ingredientName"));
         }
         backResult_btn=findViewById(R.id.backResult_btn);
@@ -82,13 +77,11 @@ public class ResultSearchActivity extends AppCompatActivity implements  ResultMe
         resultAdapter = new ResultAdapter(this, myMeal, this);
         recyclerView.setAdapter(resultAdapter);
         for (Meal name : myMeal) {
-            System.out.println("##################" + name);
             countryMealsResult.add(name);
             resultAdapter.notifyDataSetChanged();
         }
 
         for (Meal ingredientName : myMeal) {
-            System.out.println("##################" + ingredientName);
             ingredientMealsResult.add(ingredientName);
             resultAdapter.notifyDataSetChanged();
         }
@@ -111,11 +104,6 @@ public class ResultSearchActivity extends AppCompatActivity implements  ResultMe
         Intent intent = new Intent(ResultSearchActivity.this, MealInfoActivity.class);
         intent.putExtra("mealName",name);
         startActivity(intent);
-    }
-
-    @Override
-    public void onheartClick(Meal result) {
-
     }
 
 

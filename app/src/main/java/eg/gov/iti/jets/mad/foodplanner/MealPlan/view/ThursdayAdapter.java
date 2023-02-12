@@ -63,6 +63,12 @@ public class ThursdayAdapter extends RecyclerView.Adapter<ThursdayAdapter.ViewHo
                 onDayClickListener.onDayDeleteClick(mealPlan);
             }
         });
+        holder.mealImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDayClickListener.onImageClick(holder.mealNameTextView.getText().toString());
+            }
+        });
     }
 
     @Override

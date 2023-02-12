@@ -26,11 +26,12 @@ import java.util.List;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.Model.MealPlan;
 import eg.gov.iti.jets.mad.foodplanner.R;
+import eg.gov.iti.jets.mad.foodplanner.loginScreen.SharedPref;
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder>{
 
     private final Context context;
-
+    SharedPref sharedPref;
     private List<Meal> resultSearches;
 
     ResultMealClickListener resultMealClickListener;
@@ -40,6 +41,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
         this.context = context;
         this.resultSearches = resultSearches;
         this.resultMealClickListener=resultMealClickListener;
+        sharedPref=new SharedPref(context);
     }
 
     @NonNull
@@ -70,12 +72,13 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
                     holder.heart_imageView.setImageResource(R.drawable.favorite_filled_black_icon);
                     Toast.makeText(context, "Added to favorite", Toast.LENGTH_SHORT).show();
                     result.isFav = true;
+                    result.userEmail=sharedPref.read();
                     resultMealClickListener.onheartClick(result,"add");
                 }
                 else{
                     holder.heart_imageView.setImageResource(R.drawable.favorite_outline_icon);
                     Toast.makeText(context, "removed Successfully", Toast.LENGTH_LONG).show();
-                    //meal.userEmail = " ";
+                    result.userEmail = " ";
                     result.isFav = false;
                     resultMealClickListener.onheartClick(result,"remove");
                 }
@@ -97,7 +100,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
                             Toast.makeText(context, myMealPlan.strMeal, Toast.LENGTH_SHORT).show();
                             resultMealClickListener.onAddToMealPlanClick(myMealPlan);
                         }
-                       else if (item.getTitle().equals("Monday")) {
+                        else if (item.getTitle().equals("Monday")) {
                             MealPlan myMealPlan= convertMeal("Monday",result);
                             Toast.makeText(context, myMealPlan.strMeal, Toast.LENGTH_SHORT).show();
                             resultMealClickListener.onAddToMealPlanClick(myMealPlan);
@@ -122,6 +125,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
                             Toast.makeText(context, myMealPlan.strMeal, Toast.LENGTH_SHORT).show();
                             resultMealClickListener.onAddToMealPlanClick(myMealPlan);
                         }
+                        holder.addToMealPlanImage.setImageResource(R.drawable.add_icon);
                         return true;
                     }
                 });
@@ -159,11 +163,30 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
     MealPlan convertMeal(String day , Meal result){
         MealPlan mealPlan = new MealPlan();
         mealPlan.setDay(day);
-//        mealPlan.strMeal = result.strMeal;
-//        mealPlan.strArea = result.strArea;
-//        mealPlan.strCategory = result.strCategory;
-//        mealPlan.strIngredient = result.strIngredient;
-        mealPlan.setIdMeal(result.idMeal);
+        mealPlan.setStrArea(result.strArea);
+        mealPlan.setStrInstructions(result.strInstructions);
+        mealPlan.setStrIngredient1(result.strIngredient1);
+        mealPlan.setStrIngredient1(result.strIngredient2);
+        mealPlan.setStrIngredient1(result.strIngredient3);
+        mealPlan.setStrIngredient1(result.strIngredient4);
+        mealPlan.setStrIngredient1(result.strIngredient5);
+        mealPlan.setStrIngredient1(result.strIngredient6);
+        mealPlan.setStrIngredient1(result.strIngredient7);
+        mealPlan.setStrIngredient1(result.strIngredient8);
+        mealPlan.setStrIngredient1(result.strIngredient9);
+        mealPlan.setStrIngredient1(result.strIngredient10);
+        mealPlan.setStrMeasure1(result.strMeasure1);
+        mealPlan.setStrMeasure1(result.strMeasure2);
+        mealPlan.setStrMeasure1(result.strMeasure3);
+        mealPlan.setStrMeasure1(result.strMeasure4);
+        mealPlan.setStrMeasure1(result.strMeasure5);
+        mealPlan.setStrMeasure1(result.strMeasure6);
+        mealPlan.setStrMeasure1(result.strMeasure7);
+        mealPlan.setStrMeasure1(result.strMeasure8);
+        mealPlan.setStrMeasure1(result.strMeasure9);
+        mealPlan.setStrMeasure1(result.strMeasure10);
+        mealPlan.setUserEmail(sharedPref.read());
+        mealPlan.setIdMeal(result.idMeal+day);
         mealPlan.setStrMeal(result.strMeal);
         mealPlan.setStrMealThumb(result.strMealThumb);
     return mealPlan;

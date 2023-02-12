@@ -14,8 +14,8 @@ import eg.gov.iti.jets.mad.foodplanner.Model.MealPlan;
 
 @Dao
 public interface MealPlanDAO {
-    @Query("SELECT * from MealPlan")
-    LiveData<List<MealPlan>> getAllMeals_MealPlan();
+    @Query("SELECT * from MealPlan where MealUserEmail like :email")
+    LiveData<List<MealPlan>> getAllMeals_MealPlan(String email);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMeal_MealPlan(MealPlan mealPlan);
