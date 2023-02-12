@@ -39,7 +39,6 @@ public class HomeFragment extends Fragment implements HomeViewInterface,OnItemCl
     TextView countryMealName;
     Intent intent;
     HomePresenterInterface homePresenterInterface;
-    ImageView heart_ImageView;
     List<Meal> mealArrayList;
     Meal meal;
     FirebaseAuth auth;
@@ -68,26 +67,7 @@ public class HomeFragment extends Fragment implements HomeViewInterface,OnItemCl
         mealImageView = view.findViewById(R.id.home_card_imageview);
         mealNameView = view.findViewById(R.id.home_meal_name_textview);
         countryMealName = view.findViewById(R.id.home_countryNameOfMeal_textView);
-        heart_ImageView=view.findViewById(R.id.home_card_fav_imageview);
-        heart_ImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(meal.isFav==false  /*&& meal.userEmail.equals(" ")*/) {
-                    heart_ImageView.setImageResource(R.drawable.favorite_filled_black_icon);
-                    Toast.makeText(getContext(), "added Successfully" + meal.strMeal + " " + user.getEmail(), Toast.LENGTH_LONG).show();
-                    meal.userEmail = user.getEmail();
-                    meal.isFav = true;
-                    addMeal(meal);
-                }
-                else if(meal.isFav==true /*&& meal.userEmail.equals(user.getEmail())*/){
-                    heart_ImageView.setImageResource(R.drawable.favorite_outline_icon);
-                    Toast.makeText(getContext(), "removed Successfully", Toast.LENGTH_LONG).show();
-                    meal.userEmail = " ";
-                    meal.isFav = false;
-                    removeMeal(meal);
-                }
-            }
-        });
+
         mealImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,9 +88,7 @@ public class HomeFragment extends Fragment implements HomeViewInterface,OnItemCl
 
         mealNameView.setText(myMeal.get(0).strMeal);
         countryMealName.setText(myMeal.get(0).strArea);
-        if(meal.isFav==true /*&& meal.userEmail.equals(user.getEmail())*/){
-            heart_ImageView.setImageResource(R.drawable.favorite_filled_black_icon);
-        }
+
     }
 
     @Override

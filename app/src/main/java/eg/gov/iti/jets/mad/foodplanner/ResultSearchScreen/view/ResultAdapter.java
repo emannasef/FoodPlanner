@@ -33,7 +33,6 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
     private final Context context;
     SharedPref sharedPref;
     private List<Meal> resultSearches;
-    private List<String> fav;
 
     ResultMealClickListener resultMealClickListener;
 
@@ -65,28 +64,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
                 resultMealClickListener.onImageClick(holder.nameResultTextView.getText().toString());
             }
         });
-        if(result.isFav==true) {
-            holder.heart_imageView.setImageResource(R.drawable.favorite_filled_black_icon);
-        }
-        holder.heart_imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(result.isFav==false) {
-                    holder.heart_imageView.setImageResource(R.drawable.favorite_filled_black_icon);
-                    Toast.makeText(context, "Added to favorite", Toast.LENGTH_SHORT).show();
-                    result.isFav = true;
-                    result.userEmail=sharedPref.read();
-                    resultMealClickListener.onheartClick(result,"add");
-                }
-                else if(result.isFav==true){
-                    holder.heart_imageView.setImageResource(R.drawable.favorite_outline_icon);
-                    Toast.makeText(context, "removed Successfully", Toast.LENGTH_LONG).show();
-                    result.userEmail = " ";
-                    result.isFav = false;
-                    resultMealClickListener.onheartClick(result,"remove");
-                }
-            }
-        });
+        
 
         holder.addToMealPlanImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,7 +123,6 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
 
      class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
-        ImageView heart_imageView;
         public TextView nameResultTextView;
         public ConstraintLayout rowLayout;
         public View v;
@@ -157,7 +134,6 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
             imageView=itemView.findViewById(R.id.result_ImageView);
             rowLayout=itemView.findViewById(R.id.result_card);
             nameResultTextView= itemView.findViewById(R.id.resultName_textView);
-            heart_imageView=itemView.findViewById(R.id.heartOutlineResult_ImageView);
             addToMealPlanImage=itemView.findViewById(R.id.addToMealPlan);
         }
     }

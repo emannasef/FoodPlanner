@@ -37,13 +37,11 @@ public class ResultSearchActivity extends AppCompatActivity implements  ResultMe
     RecyclerView recyclerView;
     ResultSearchPresenterInterface resultSearchPresenterInterface;
 
-    ImageView heartImageView;
     FirebaseAuth auth;
     FirebaseUser user;
     Intent intent;
     ArrayList<Meal> countryMealsResult = new ArrayList();
     ArrayList<Meal> ingredientMealsResult = new ArrayList();
-    ArrayList<String> isFav = new ArrayList();
 
 
     @Override
