@@ -1,5 +1,7 @@
 package eg.gov.iti.jets.mad.foodplanner.ResultSearchScreen.presenter;
 
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 import eg.gov.iti.jets.mad.foodplanner.Model.Category;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
@@ -19,7 +21,12 @@ public class ResultSearchPresenter implements ResultSearchPresenterInterface, Ne
         this.resultSearchViewInterface=resultSearchViewInterface;
         this.repositoryInterface= repositoryInterface;
     }
-    
+
+    @Override
+    public LiveData<List<Meal>> getStoredMeals(String email) {
+        return repositoryInterface.getAllStoredFavMeals(email);
+    }
+
     @Override
     public void getMeals(String key, String value) {
         if(key.equals("searchCategory")){

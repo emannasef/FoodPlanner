@@ -105,6 +105,7 @@ public class Repository implements RepositoryInterface {
     public void deleteMeal_MealPlan(MealPlan mealPlan) {
         localSource.deleteMeal_MealPlan(mealPlan);
     }
+
     public LiveData<List<Meal>> getAllStoredFavMeals(String email) {
         return localSource.getAllStoredFavMeals(email);
     }

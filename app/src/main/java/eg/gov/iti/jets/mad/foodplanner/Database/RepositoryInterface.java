@@ -20,12 +20,12 @@ public interface RepositoryInterface {
     public void getMealsByCountry(Network_Delegate networkDelegate,String countryName);
     public void getMealsByIngredient(Network_Delegate networkDelegate,String ingredientName);
     public void getIngredient(Network_Delegate networkDelegate);
+
     //LiveData<List<Meal>> getAllStoredMeals();
     LiveData<List<Meal>> getAllStoredFavMeals(String email);
     LiveData<List<MealPlan>> getAllStoredMeals_MealPlan(String email);
-
     void insertMeal_MealPlan(MealPlan mealPlan);
-
     void deleteMeal_MealPlan(MealPlan mealPlan);
+
 
 }

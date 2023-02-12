@@ -33,11 +33,11 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
     private final Context context;
     SharedPref sharedPref;
     private List<Meal> resultSearches;
+    private List<String> fav;
 
     ResultMealClickListener resultMealClickListener;
 
     public ResultAdapter(Context context, List<Meal> resultSearches,ResultMealClickListener resultMealClickListener) {
-
         this.context = context;
         this.resultSearches = resultSearches;
         this.resultMealClickListener=resultMealClickListener;
@@ -65,6 +65,9 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
                 resultMealClickListener.onImageClick(holder.nameResultTextView.getText().toString());
             }
         });
+        if(result.isFav==true) {
+            holder.heart_imageView.setImageResource(R.drawable.favorite_filled_black_icon);
+        }
         holder.heart_imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +78,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
                     result.userEmail=sharedPref.read();
                     resultMealClickListener.onheartClick(result,"add");
                 }
-                else{
+                else if(result.isFav==true){
                     holder.heart_imageView.setImageResource(R.drawable.favorite_outline_icon);
                     Toast.makeText(context, "removed Successfully", Toast.LENGTH_LONG).show();
                     result.userEmail = " ";

@@ -2,6 +2,7 @@ package eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +26,6 @@ import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.Database.ConcreteLocalSource;
 import eg.gov.iti.jets.mad.foodplanner.Database.Repository;
-import eg.gov.iti.jets.mad.foodplanner.Database.RepositoryInterface;
 import eg.gov.iti.jets.mad.foodplanner.MainActivity;
 import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.presenter.MealInfoPresenter;
 import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.presenter.MealInfoPresenterInterface;
@@ -48,15 +48,12 @@ public class MealInfoActivity extends AppCompatActivity implements MealInfoViewI
     ImageView backImage;
     ImageView mealImage;
     ImageView heartImageView;
-    Api_Client api_client;
     List ingredientArrayList;
     List measureArrayList;
     Intent intent;
     Meal meal;
-    int i;
     FirebaseAuth auth;
     FirebaseUser user;
-    RepositoryInterface repositoryInterface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,8 +115,20 @@ public class MealInfoActivity extends AppCompatActivity implements MealInfoViewI
 
     @Override
     public void showData(List<Meal> myMeal) {
-
         meal=myMeal.get(0);
+        mealInfoPresenterInterface.getStoredMeals(user.getEmail()).observe(this, new Observer<List<Meal>>() {
+            @Override
+            public void onChanged(List<Meal> meals) {
+                for(int i=0;i<meals.size();i++){
+                    if(meals.get(i).strMeal.equals(meal.strMeal)){
+                        heartImageView.setImageResource(R.drawable.favorite_filled_black_icon);
+                        meal.isFav=true;
+                    }
+                }
+            }
+        });
+
+
         Glide.with(this).load(myMeal.get(0).strMealThumb)
                 .apply(new RequestOptions()
                         .override(150, 150)
@@ -129,9 +138,6 @@ public class MealInfoActivity extends AppCompatActivity implements MealInfoViewI
         mealName.setText(myMeal.get(0).strMeal);
         countryName.setText(myMeal.get(0).strArea);
         steps.setText(myMeal.get(0).strInstructions);
-        if(meal.isFav==true /*&& meal.userEmail.equals(user.getEmail())*/) {
-            heartImageView.setImageResource(R.drawable.favorite_filled_black_icon);
-        }
 
         if(myMeal.get(0).strIngredient1!=null&&!myMeal.get(0).strIngredient1.isEmpty()&&!myMeal.get(0).strIngredient1.equals(" ")){
             ingredientArrayList.add(myMeal.get(0).strIngredient1);

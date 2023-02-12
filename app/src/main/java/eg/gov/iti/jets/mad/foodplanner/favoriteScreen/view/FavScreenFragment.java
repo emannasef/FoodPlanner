@@ -74,14 +74,6 @@ public class FavScreenFragment extends Fragment implements OnFavoriteClickListen
 
     @Override
     public void showData(String email) {
-       /* favPresenterInterface.getMeals().observe(getViewLifecycleOwner(), new Observer<List<Meal>>() {
-            @Override
-            public void onChanged(List<Meal> meals) {
-
-                favMealAdapter.setList(meals);
-                recyclerView.setAdapter(favMealAdapter);
-            }
-        });*/
        favPresenterInterface.getFavMeals(email).observe(getViewLifecycleOwner(), new Observer<List<Meal>>() {
             @Override
             public void onChanged(List<Meal> meals) {
