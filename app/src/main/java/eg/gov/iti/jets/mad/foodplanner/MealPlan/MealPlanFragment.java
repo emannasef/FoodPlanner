@@ -1,4 +1,4 @@
-package eg.gov.iti.jets.mad.foodplanner.MealPlan.view;
+package eg.gov.iti.jets.mad.foodplanner.MealPlan;
 
 import android.os.Bundle;
 
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +20,18 @@ import eg.gov.iti.jets.mad.foodplanner.Database.ConcreteLocalSource;
 import eg.gov.iti.jets.mad.foodplanner.Database.Repository;
 import eg.gov.iti.jets.mad.foodplanner.MealPlan.presenter.MealPlanPresenter;
 import eg.gov.iti.jets.mad.foodplanner.MealPlan.presenter.MealPlanPresenterInterface;
-import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
+import eg.gov.iti.jets.mad.foodplanner.MealPlan.view.FridayAdapter;
+import eg.gov.iti.jets.mad.foodplanner.MealPlan.view.MealPlanViewInterface;
+import eg.gov.iti.jets.mad.foodplanner.MealPlan.view.MondayAdapter;
+import eg.gov.iti.jets.mad.foodplanner.MealPlan.view.OnDayClickListener;
+import eg.gov.iti.jets.mad.foodplanner.MealPlan.view.SaturdayAdapter;
+import eg.gov.iti.jets.mad.foodplanner.MealPlan.view.SundayAdapter;
+import eg.gov.iti.jets.mad.foodplanner.MealPlan.view.ThursdayAdapter;
+import eg.gov.iti.jets.mad.foodplanner.MealPlan.view.TuesdayAdapter;
+import eg.gov.iti.jets.mad.foodplanner.MealPlan.view.WedensdayAdapter;
 import eg.gov.iti.jets.mad.foodplanner.Model.MealPlan;
 import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
 import eg.gov.iti.jets.mad.foodplanner.R;
-import eg.gov.iti.jets.mad.foodplanner.favoriteScreen.presenter.FavPresenter;
-import eg.gov.iti.jets.mad.foodplanner.favoriteScreen.view.favMealAdapter;
 
 
 public class MealPlanFragment extends Fragment implements OnDayClickListener, MealPlanViewInterface {
@@ -212,15 +217,15 @@ public class MealPlanFragment extends Fragment implements OnDayClickListener, Me
     public void onDayDeleteClick(MealPlan meal) {
 
         if (meal.getDay().equals("Sunday")) {
-           // mySundayList.remove(meal);
+            // mySundayList.remove(meal);
             deleteMealFromMealPlan(meal);
-           // sundayAdapter.notifyDataSetChanged();
+            // sundayAdapter.notifyDataSetChanged();
 
 
         } if (meal.getDay().equals("Monday")) {
-          //  myMondayList.remove(meal);
+            //  myMondayList.remove(meal);
             deleteMealFromMealPlan(meal);
-          //  mondayAdapter.notifyDataSetChanged();
+            //  mondayAdapter.notifyDataSetChanged();
         }
 
         if (meal.getDay().equals("Saturday")) {

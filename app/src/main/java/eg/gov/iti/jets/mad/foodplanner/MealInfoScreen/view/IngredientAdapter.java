@@ -1,4 +1,4 @@
-package eg.gov.iti.jets.mad.foodplanner.MealInfoScreen;
+package eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.R;
@@ -43,6 +42,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
         holder.name.setText(ingredientArrayList.get(position));
         holder.quantity.setText(measureArrayList.get(position));
         Glide.with(context).load("https://www.themealdb.com/images/ingredients/"+ingredientArrayList.get(position)+ "-Small.png").apply(new RequestOptions().override(150, 150).placeholder(R.drawable.mealinfo)).into(holder.imageView);
+
     }
 
     @Override
@@ -55,11 +55,13 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
         public TextView quantity;
         public TextView name;
         public ImageView imageView;
+        public ImageView heart_ImageView;
         public ConstraintLayout rowLayout;
         public View v;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             v = itemView;
+            heart_ImageView=itemView.findViewById(R.id.MealInfoHeartImageView);
             quantity = itemView.findViewById(R.id.ingredientQuantity);
             name = itemView.findViewById(R.id.ingredientName);
             imageView=itemView.findViewById(R.id.ingredientImage);

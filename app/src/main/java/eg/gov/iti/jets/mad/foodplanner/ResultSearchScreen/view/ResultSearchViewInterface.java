@@ -10,4 +10,5 @@ public interface ResultSearchViewInterface {
     public void addMeal(Meal meal);
 
     public void addMeal_MeaPlan(MealPlan meal);
+    public void deleteMeal(Meal meal);
 }

@@ -9,5 +9,5 @@ public interface ResultMealClickListener{
     void onheartClick(Meal result);
 
     void onAddToMealPlanClick(MealPlan result);
-
+    void onheartClick(Meal result ,String method );
 }

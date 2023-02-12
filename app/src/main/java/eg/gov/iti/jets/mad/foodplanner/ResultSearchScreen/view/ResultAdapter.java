@@ -66,9 +66,19 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
         holder.heart_imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.heart_imageView.setImageResource(R.drawable.favorite_filled_black_icon);
-                Toast.makeText(context, "Added to favorite", Toast.LENGTH_SHORT).show();
-                resultMealClickListener.onheartClick(result);
+                if(result.isFav==false) {
+                    holder.heart_imageView.setImageResource(R.drawable.favorite_filled_black_icon);
+                    Toast.makeText(context, "Added to favorite", Toast.LENGTH_SHORT).show();
+                    result.isFav = true;
+                    resultMealClickListener.onheartClick(result,"add");
+                }
+                else{
+                    holder.heart_imageView.setImageResource(R.drawable.favorite_outline_icon);
+                    Toast.makeText(context, "removed Successfully", Toast.LENGTH_LONG).show();
+                    //meal.userEmail = " ";
+                    result.isFav = false;
+                    resultMealClickListener.onheartClick(result,"remove");
+                }
             }
         });
 

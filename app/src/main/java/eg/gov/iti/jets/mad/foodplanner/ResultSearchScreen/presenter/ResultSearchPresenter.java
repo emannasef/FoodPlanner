@@ -19,8 +19,7 @@ public class ResultSearchPresenter implements ResultSearchPresenterInterface, Ne
         this.resultSearchViewInterface=resultSearchViewInterface;
         this.repositoryInterface= repositoryInterface;
     }
-
-
+    
     @Override
     public void getMeals(String key, String value) {
         if(key.equals("searchCategory")){
@@ -46,7 +45,11 @@ public class ResultSearchPresenter implements ResultSearchPresenterInterface, Ne
     @Override
     public void addToMealPlan(MealPlan meal) {
         repositoryInterface.insertMeal_MealPlan(meal);
+
     }
+
+    public void deleteFromFav(Meal meal) {
+        repositoryInterface.deleteMeal(meal);}
 
     @Override
     public void onSuccessResult(List<Meal> myMeal) {

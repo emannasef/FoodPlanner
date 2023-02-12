@@ -38,4 +38,9 @@ public class HomePresenter implements HomePresenterInterface, Network_Delegate {
     public void addToFav(Meal meal) {
         repositoryInterface.insertMeal(meal);
     }
+
+    @Override
+    public void removeFromFav(Meal meal) {
+        repositoryInterface.deleteMeal(meal);
+    }
 }

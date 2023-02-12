@@ -17,6 +17,7 @@ public class ConcreteLocalSource implements LocalSource {
     private MealPlanDAO mealPlanDAO;
     private static ConcreteLocalSource concerteLocalSource =null;
     private LiveData<List<Meal>> storedMeals;
+    private LiveData<List<Meal>> storedFavMeals;
 
     private LiveData<List<MealPlan>> storedMeals_MealPlan;
 
@@ -85,6 +86,7 @@ public class ConcreteLocalSource implements LocalSource {
             }
         }).start();
     }
-
-
+    public LiveData<List<Meal>> getAllStoredFavMeals(String email) {
+        return dao.getAllFavMeals(email);
+    }
 }

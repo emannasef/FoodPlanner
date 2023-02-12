@@ -21,7 +21,7 @@ public interface RepositoryInterface {
     public void getMealsByIngredient(Network_Delegate networkDelegate,String ingredientName);
     public void getIngredient(Network_Delegate networkDelegate);
     LiveData<List<Meal>> getAllStoredMeals();
-
+    LiveData<List<Meal>> getAllStoredFavMeals(String email);
     LiveData<List<MealPlan>> getAllStoredMeals_MealPlan();
 
     void insertMeal_MealPlan(MealPlan mealPlan);

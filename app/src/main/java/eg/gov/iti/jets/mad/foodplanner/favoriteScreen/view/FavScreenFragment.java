@@ -18,7 +18,7 @@ import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.Database.ConcreteLocalSource;
 import eg.gov.iti.jets.mad.foodplanner.Database.Repository;
-import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.MealInfoActivity;
+import eg.gov.iti.jets.mad.foodplanner.MealInfoScreen.view.MealInfoActivity;
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.Network.Api_Client;
 import eg.gov.iti.jets.mad.foodplanner.R;
@@ -30,6 +30,7 @@ public class FavScreenFragment extends Fragment implements OnFavoriteClickListen
     RecyclerView recyclerView;
     favMealAdapter favMealAdapter;
     FavPresenterInterface favPresenterInterface;
+    Intent intent;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,12 +74,20 @@ public class FavScreenFragment extends Fragment implements OnFavoriteClickListen
         favPresenterInterface.getMeals().observe(getViewLifecycleOwner(), new Observer<List<Meal>>() {
             @Override
             public void onChanged(List<Meal> meals) {
+
+                favMealAdapter.setList(meals);
+                recyclerView.setAdapter(favMealAdapter);
+            }
+        });
+       /* favPresenterInterface.getFavMeals().observe(getViewLifecycleOwner(), new Observer<List<Meal>>() {
+            @Override
+            public void onChanged(List<Meal> meals) {
                 if(meals!=null) {
                     favMealAdapter.setList(meals);
                     recyclerView.setAdapter(favMealAdapter);
                 }
             }
-        });
+        });*/
     }
     @Override
     public void goToMealInfo(String mealName) {

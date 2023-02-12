@@ -1,4 +1,4 @@
-package eg.gov.iti.jets.mad.foodplanner.searchScreen;
+package eg.gov.iti.jets.mad.foodplanner.searchScreen.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,11 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.Model.Category;
-import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
 import eg.gov.iti.jets.mad.foodplanner.R;
 
 public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.ViewHolder>{

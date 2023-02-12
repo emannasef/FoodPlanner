@@ -1,4 +1,4 @@
-package eg.gov.iti.jets.mad.foodplanner.searchScreen;
+package eg.gov.iti.jets.mad.foodplanner.searchScreen.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,8 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import eg.gov.iti.jets.mad.foodplanner.Model.Meal;
