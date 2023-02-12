@@ -64,7 +64,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
                 resultMealClickListener.onImageClick(holder.nameResultTextView.getText().toString());
             }
         });
-        
+
 
         holder.addToMealPlanImage.setOnClickListener(new View.OnClickListener() {
             @Override
