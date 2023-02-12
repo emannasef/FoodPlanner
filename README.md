@@ -5,7 +5,8 @@ Android Applicication help users that interested in cooking.
 
 
 
-Main features:
+**Main features:
+
 - Random meals
 
 - Searching by Ingredients, Categories, Countries and meal's name
@@ -23,7 +24,8 @@ Main features:
 
 
 
-Technology used in our project:
+**Technology used in our project:
+
 - Java Language
 
 - Firebase (Authentication and Firestore)
