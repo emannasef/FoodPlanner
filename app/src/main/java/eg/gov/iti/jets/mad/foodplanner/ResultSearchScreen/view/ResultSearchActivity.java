@@ -96,6 +96,7 @@ public class ResultSearchActivity extends AppCompatActivity implements  ResultMe
             ingredientMealsResult.add(ingredientName);
             resultAdapter.notifyDataSetChanged();
         }
+
     }
 
     @Override

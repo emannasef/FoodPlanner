@@ -116,19 +116,20 @@ public class MealInfoActivity extends AppCompatActivity implements MealInfoViewI
     @Override
     public void showData(List<Meal> myMeal) {
         meal=myMeal.get(0);
-        mealInfoPresenterInterface.getStoredMeals(user.getEmail()).observe(this, new Observer<List<Meal>>() {
-            @Override
-            public void onChanged(List<Meal> meals) {
-                for(int i=0;i<meals.size();i++){
-                    if(meals.get(i).strMeal.equals(meal.strMeal)){
-                        heartImageView.setImageResource(R.drawable.favorite_filled_black_icon);
-                        meal.isFav=true;
+
+        if(user!=null) {
+            mealInfoPresenterInterface.getStoredMeals(user.getEmail()).observe(this, new Observer<List<Meal>>() {
+                @Override
+                public void onChanged(List<Meal> meals) {
+                    for (int i = 0; i < meals.size(); i++) {
+                        if (meals.get(i).strMeal.equals(meal.strMeal)) {
+                            heartImageView.setImageResource(R.drawable.favorite_filled_black_icon);
+                            meal.isFav = true;
+                        }
                     }
                 }
-            }
-        });
-
-
+            });
+        }
         Glide.with(this).load(myMeal.get(0).strMealThumb)
                 .apply(new RequestOptions()
                         .override(150, 150)
